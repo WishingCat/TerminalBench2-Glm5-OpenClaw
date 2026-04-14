@@ -1,0 +1,100 @@
+{
+    "id": "ce4257a0-95f1-4200-a0dd-3d19d5473dac",
+    "task_name": "winning-avg-corewars",
+    "trial_name": "winning-avg-corewars__VYRzNuG",
+    "trial_uri": "file:///Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/winning-avg-corewars__VYRzNuG",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "winning-avg-corewars"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "693d17797b3d2920f9f0316b3f758aee6b228e816c78bab22b75eae684853f13",
+    "config": {
+        "task": {
+            "path": "winning-avg-corewars",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "winning-avg-corewars__VYRzNuG",
+        "trials_dir": "/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/jobs/z-ai-glm-5-openclaw-terminal-bench-2.0",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": 4.0,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "openai/z-ai/glm-5",
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "3df6613c-4502-49a1-8f39-1099075e2aa7"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "unknown",
+        "model_info": {
+            "name": "z-ai/glm-5",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 165786,
+        "n_cache_tokens": 4404765,
+        "n_output_tokens": 27327,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": null,
+    "exception_info": {
+        "exception_type": "RewardFileNotFoundError",
+        "exception_message": "No reward file found at /Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/winning-avg-corewars__VYRzNuG/verifier/reward.txt or /Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/winning-avg-corewars__VYRzNuG/verifier/reward.json",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/harbor-openclaw/src/harbor/trial/trial.py\", line 505, in run\n    await self._run_verification()\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/harbor-openclaw/src/harbor/trial/trial.py\", line 282, in _run_verification\n    await self._verify_with_retry()\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/.venv/lib/python3.13/site-packages/tenacity/asyncio/__init__.py\", line 193, in async_wrapped\n    return await copy(fn, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/.venv/lib/python3.13/site-packages/tenacity/asyncio/__init__.py\", line 112, in __call__\n    do = await self.iter(retry_state=retry_state)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/.venv/lib/python3.13/site-packages/tenacity/asyncio/__init__.py\", line 157, in iter\n    result = await action(retry_state)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/.venv/lib/python3.13/site-packages/tenacity/_utils.py\", line 111, in inner\n    return call(*args, **kwargs)\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/.venv/lib/python3.13/site-packages/tenacity/__init__.py\", line 393, in <lambda>\n    self._add_action_func(lambda rs: rs.outcome.result())\n                                     ~~~~~~~~~~~~~~~~~^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py\", line 449, in result\n    return self.__get_result()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py\", line 401, in __get_result\n    raise self._exception\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/.venv/lib/python3.13/site-packages/tenacity/asyncio/__init__.py\", line 116, in __call__\n    result = await fn(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/harbor-openclaw/src/harbor/trial/trial.py\", line 300, in _verify_with_retry\n    self.result.verifier_result = await asyncio.wait_for(\n                                  ^^^^^^^^^^^^^^^^^^^^^^^\n    ...<2 lines>...\n    )\n    ^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/harbor-openclaw/src/harbor/verifier/verifier.py\", line 145, in verify\n    raise RewardFileNotFoundError(\n    ...<3 lines>...\n    )\nharbor.verifier.verifier.RewardFileNotFoundError: No reward file found at /Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/winning-avg-corewars__VYRzNuG/verifier/reward.txt or /Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/winning-avg-corewars__VYRzNuG/verifier/reward.json\n",
+        "occurred_at": "2026-04-14T03:47:20.137105"
+    },
+    "started_at": "2026-04-13T19:21:45.985096Z",
+    "finished_at": "2026-04-13T19:47:21.047461Z",
+    "environment_setup": {
+        "started_at": "2026-04-13T19:21:45.986872Z",
+        "finished_at": "2026-04-13T19:22:08.867642Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-13T19:22:08.867687Z",
+        "finished_at": "2026-04-13T19:27:09.163330Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-13T19:27:09.163395Z",
+        "finished_at": "2026-04-13T19:47:19.896550Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-13T19:47:19.896623Z",
+        "finished_at": "2026-04-13T19:47:20.133894Z"
+    }
+}

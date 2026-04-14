@@ -1,0 +1,91 @@
+{
+    "id": "3e3ccd1b-8650-49e0-8717-252d6be94011",
+    "started_at": "2026-04-14T15:13:54.318642",
+    "finished_at": null,
+    "n_total_trials": 89,
+    "stats": {
+        "n_trials": 40,
+        "n_errors": 16,
+        "evals": {
+            "openclaw__z-ai-glm-5__terminal-bench": {
+                "n_trials": 31,
+                "n_errors": 16,
+                "metrics": [
+                    {
+                        "mean": 0.375
+                    }
+                ],
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "pytorch-model-cli__QqPqAoX",
+                            "custom-memory-heap-crash__EBVdkN8",
+                            "password-recovery__waJJqEk",
+                            "merge-diff-arc-agi-task__riTDFZh",
+                            "modernize-scientific-stack__dZVEDQo",
+                            "multi-source-data-merger__Pyo9zQB",
+                            "cobol-modernization__g8Rhf59",
+                            "pypi-server__uvh4Pb2",
+                            "prove-plus-comm__VzHhbws",
+                            "portfolio-optimization__TqATWNp",
+                            "largest-eigenval__yswuCfP",
+                            "configure-git-webserver__WmLErTr",
+                            "crack-7z-hash__j2HJ3ey",
+                            "log-summary-date-ranges__DckaAzM",
+                            "fix-git__JUXxGV9"
+                        ],
+                        "0.0": [
+                            "distribution-search__P5yPDQR",
+                            "mteb-retrieve__2azWNF8",
+                            "adaptive-rejection-sampler__NCS3R8Q",
+                            "llm-inference-batching-scheduler__5tpkTGQ",
+                            "caffe-cifar-10__dYAkd4J",
+                            "reshard-c4-data__YU6NWKg",
+                            "headless-terminal__rjGcrnE",
+                            "feal-linear-cryptanalysis__WQnUkNw",
+                            "db-wal-recovery__uqSmQvq",
+                            "chess-best-move__4P4JUAW",
+                            "gpt2-codegolf__5WCf3aH",
+                            "torch-tensor-parallelism__asfBh27",
+                            "write-compressor__NYaXjWq",
+                            "break-filter-js-from-html__gfAHxzQ",
+                            "regex-chess__Wc73qCg",
+                            "polyglot-rust-c__zMcZGdy"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "password-recovery__waJJqEk",
+                        "cobol-modernization__g8Rhf59",
+                        "pypi-server__uvh4Pb2",
+                        "gpt2-codegolf__5WCf3aH",
+                        "break-filter-js-from-html__gfAHxzQ",
+                        "configure-git-webserver__WmLErTr",
+                        "polyglot-rust-c__zMcZGdy"
+                    ],
+                    "RewardFileNotFoundError": [
+                        "winning-avg-corewars__VYRzNuG",
+                        "path-tracing__Gw9rw5X",
+                        "overfull-hbox__P78PTdz",
+                        "path-tracing-reverse__ETQrJBm"
+                    ],
+                    "RuntimeError": [
+                        "compile-compcert__NupyMPz"
+                    ],
+                    "EnvironmentStartTimeoutError": [
+                        "hf-model-inference__V3ujsLR"
+                    ],
+                    "AgentSetupTimeoutError": [
+                        "schemelike-metacircular-eval__HWE5mb5"
+                    ],
+                    "CancelledError": [
+                        "build-pov-ray__bG3eKCY",
+                        "qemu-startup__6PKRjx9"
+                    ]
+                }
+            }
+        }
+    },
+    "trial_results": []
+}

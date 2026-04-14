@@ -1,0 +1,100 @@
+{
+    "id": "eee34f25-1126-44de-a420-4db2d5d36e28",
+    "task_name": "overfull-hbox",
+    "trial_name": "overfull-hbox__P78PTdz",
+    "trial_uri": "file:///Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/overfull-hbox__P78PTdz",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "overfull-hbox"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "96c3365a4d527007766a44afa802cd19d8601eb13b458cf4e7a2c1dce8058cb7",
+    "config": {
+        "task": {
+            "path": "overfull-hbox",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "overfull-hbox__P78PTdz",
+        "trials_dir": "/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/jobs/z-ai-glm-5-openclaw-terminal-bench-2.0",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": 4.0,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "openai/z-ai/glm-5",
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "3e3ccd1b-8650-49e0-8717-252d6be94011"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "unknown",
+        "model_info": {
+            "name": "z-ai/glm-5",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 38518,
+        "n_cache_tokens": 437308,
+        "n_output_tokens": 11745,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": null,
+    "exception_info": {
+        "exception_type": "RewardFileNotFoundError",
+        "exception_message": "No reward file found at /Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/overfull-hbox__P78PTdz/verifier/reward.txt or /Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/overfull-hbox__P78PTdz/verifier/reward.json",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/harbor-openclaw/src/harbor/trial/trial.py\", line 505, in run\n    await self._run_verification()\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/harbor-openclaw/src/harbor/trial/trial.py\", line 282, in _run_verification\n    await self._verify_with_retry()\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/.venv/lib/python3.13/site-packages/tenacity/asyncio/__init__.py\", line 193, in async_wrapped\n    return await copy(fn, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/.venv/lib/python3.13/site-packages/tenacity/asyncio/__init__.py\", line 112, in __call__\n    do = await self.iter(retry_state=retry_state)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/.venv/lib/python3.13/site-packages/tenacity/asyncio/__init__.py\", line 157, in iter\n    result = await action(retry_state)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/.venv/lib/python3.13/site-packages/tenacity/_utils.py\", line 111, in inner\n    return call(*args, **kwargs)\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/.venv/lib/python3.13/site-packages/tenacity/__init__.py\", line 393, in <lambda>\n    self._add_action_func(lambda rs: rs.outcome.result())\n                                     ~~~~~~~~~~~~~~~~~^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py\", line 449, in result\n    return self.__get_result()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py\", line 401, in __get_result\n    raise self._exception\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/.venv/lib/python3.13/site-packages/tenacity/asyncio/__init__.py\", line 116, in __call__\n    result = await fn(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/harbor-openclaw/src/harbor/trial/trial.py\", line 300, in _verify_with_retry\n    self.result.verifier_result = await asyncio.wait_for(\n                                  ^^^^^^^^^^^^^^^^^^^^^^^\n    ...<2 lines>...\n    )\n    ^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/harbor-openclaw/src/harbor/verifier/verifier.py\", line 145, in verify\n    raise RewardFileNotFoundError(\n    ...<3 lines>...\n    )\nharbor.verifier.verifier.RewardFileNotFoundError: No reward file found at /Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/overfull-hbox__P78PTdz/verifier/reward.txt or /Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/overfull-hbox__P78PTdz/verifier/reward.json\n",
+        "occurred_at": "2026-04-14T08:45:07.015031"
+    },
+    "started_at": "2026-04-14T00:15:04.736230Z",
+    "finished_at": "2026-04-14T00:45:08.208406Z",
+    "environment_setup": {
+        "started_at": "2026-04-14T00:15:04.738121Z",
+        "finished_at": "2026-04-14T00:16:27.995285Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-14T00:16:27.995355Z",
+        "finished_at": "2026-04-14T00:40:05.959002Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-14T00:40:05.959246Z",
+        "finished_at": "2026-04-14T00:45:06.619724Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-14T00:45:06.619978Z",
+        "finished_at": "2026-04-14T00:45:07.013783Z"
+    }
+}

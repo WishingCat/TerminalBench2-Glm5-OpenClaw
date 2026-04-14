@@ -1,0 +1,170 @@
+{
+  "agent:main:main": {
+    "sessionId": "c638fe83-92d7-4dda-98a1-6f51987c846d",
+    "updatedAt": 1776114999664,
+    "skillsSnapshot": {
+      "prompt": "\n\nThe following skills provide specialized instructions for specific tasks.\nUse the read tool to load a skill's file when the task matches its description.\nWhen a skill file references a relative path, resolve it against the skill directory (parent of SKILL.md / dirname of the path) and use that absolute path in tool commands.\n\n<available_skills>\n  <skill>\n    <name>healthcheck</name>\n    <description>Host security hardening and risk-tolerance configuration for OpenClaw deployments. Use when a user asks for security audits, firewall/SSH/update hardening, risk posture, exposure review, OpenClaw cron scheduling for periodic checks, or version status checks on a machine running OpenClaw (laptop, workstation, Pi, VPS).</description>\n    <location>/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/healthcheck/SKILL.md</location>\n  </skill>\n  <skill>\n    <name>node-connect</name>\n    <description>Diagnose OpenClaw node connection and pairing failures for Android, iOS, and macOS companion apps. Use when QR/setup code/manual connect fails, local Wi-Fi works but VPS/tailnet does not, or errors mention pairing required, unauthorized, bootstrap token invalid or expired, gateway.bind, gateway.remote.url, Tailscale, or plugins.entries.device-pair.config.publicUrl.</description>\n    <location>/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/node-connect/SKILL.md</location>\n  </skill>\n  <skill>\n    <name>openai-whisper-api</name>\n    <description>Transcribe audio via OpenAI Audio Transcriptions API (Whisper).</description>\n    <location>/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/openai-whisper-api/SKILL.md</location>\n  </skill>\n  <skill>\n    <name>skill-creator</name>\n    <description>Create, edit, improve, or audit AgentSkills. Use when creating a new skill from scratch or when asked to improve, review, audit, tidy up, or clean up an existing skill or SKILL.md file. Also use when editing or restructuring a skill directory (moving files to references/ or scripts/, removing stale content, validating against the AgentSkills spec). Triggers on phrases like &quot;create a skill&quot;, &quot;author a skill&quot;, &quot;tidy up a skill&quot;, &quot;improve this skill&quot;, &quot;review the skill&quot;, &quot;clean up the skill&quot;, &quot;audit the skill&quot;.</description>\n    <location>/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/skill-creator/SKILL.md</location>\n  </skill>\n  <skill>\n    <name>taskflow</name>\n    <description>Use when work should span one or more detached tasks but still behave like one job with a single owner context. TaskFlow is the durable flow substrate under authoring layers like Lobster, ACPX, plugins, or plain code. Keep conditional logic in the caller; use TaskFlow for flow identity, child-task linkage, waiting state, revision-checked mutations, and user-facing emergence.</description>\n    <location>/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow/SKILL.md</location>\n  </skill>\n  <skill>\n    <name>taskflow-inbox-triage</name>\n    <description>Example TaskFlow authoring pattern for inbox triage. Use when messages need different treatment based on intent, with some routes notifying immediately, some waiting on outside answers, and others rolling into a later summary.</description>\n    <location>/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow-inbox-triage/SKILL.md</location>\n  </skill>\n  <skill>\n    <name>weather</name>\n    <description>Get current weather and forecasts via wttr.in or Open-Meteo. Use when: user asks about weather, temperature, or forecasts for any location. NOT for: historical weather data, severe weather alerts, or detailed meteorological analysis. No API key needed.</description>\n    <location>/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/weather/SKILL.md</location>\n  </skill>\n</available_skills>",
+      "skills": [
+        {
+          "name": "healthcheck"
+        },
+        {
+          "name": "node-connect"
+        },
+        {
+          "name": "openai-whisper-api",
+          "primaryEnv": "OPENAI_API_KEY",
+          "requiredEnv": [
+            "OPENAI_API_KEY"
+          ]
+        },
+        {
+          "name": "skill-creator"
+        },
+        {
+          "name": "taskflow"
+        },
+        {
+          "name": "taskflow-inbox-triage"
+        },
+        {
+          "name": "weather",
+          "requiredEnv": []
+        }
+      ],
+      "resolvedSkills": [
+        {
+          "name": "healthcheck",
+          "description": "Host security hardening and risk-tolerance configuration for OpenClaw deployments. Use when a user asks for security audits, firewall/SSH/update hardening, risk posture, exposure review, OpenClaw cron scheduling for periodic checks, or version status checks on a machine running OpenClaw (laptop, workstation, Pi, VPS).",
+          "filePath": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/healthcheck/SKILL.md",
+          "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/healthcheck",
+          "source": "openclaw-bundled",
+          "sourceInfo": {
+            "path": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/healthcheck/SKILL.md",
+            "source": "openclaw-bundled",
+            "scope": "project",
+            "origin": "top-level",
+            "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/healthcheck"
+          },
+          "disableModelInvocation": false
+        },
+        {
+          "name": "node-connect",
+          "description": "Diagnose OpenClaw node connection and pairing failures for Android, iOS, and macOS companion apps. Use when QR/setup code/manual connect fails, local Wi-Fi works but VPS/tailnet does not, or errors mention pairing required, unauthorized, bootstrap token invalid or expired, gateway.bind, gateway.remote.url, Tailscale, or plugins.entries.device-pair.config.publicUrl.",
+          "filePath": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/node-connect/SKILL.md",
+          "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/node-connect",
+          "source": "openclaw-bundled",
+          "sourceInfo": {
+            "path": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/node-connect/SKILL.md",
+            "source": "openclaw-bundled",
+            "scope": "project",
+            "origin": "top-level",
+            "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/node-connect"
+          },
+          "disableModelInvocation": false
+        },
+        {
+          "name": "openai-whisper-api",
+          "description": "Transcribe audio via OpenAI Audio Transcriptions API (Whisper).",
+          "filePath": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/openai-whisper-api/SKILL.md",
+          "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/openai-whisper-api",
+          "source": "openclaw-bundled",
+          "sourceInfo": {
+            "path": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/openai-whisper-api/SKILL.md",
+            "source": "openclaw-bundled",
+            "scope": "project",
+            "origin": "top-level",
+            "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/openai-whisper-api"
+          },
+          "disableModelInvocation": false
+        },
+        {
+          "name": "skill-creator",
+          "description": "Create, edit, improve, or audit AgentSkills. Use when creating a new skill from scratch or when asked to improve, review, audit, tidy up, or clean up an existing skill or SKILL.md file. Also use when editing or restructuring a skill directory (moving files to references/ or scripts/, removing stale content, validating against the AgentSkills spec). Triggers on phrases like \"create a skill\", \"author a skill\", \"tidy up a skill\", \"improve this skill\", \"review the skill\", \"clean up the skill\", \"audit the skill\".",
+          "filePath": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/skill-creator/SKILL.md",
+          "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/skill-creator",
+          "source": "openclaw-bundled",
+          "sourceInfo": {
+            "path": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/skill-creator/SKILL.md",
+            "source": "openclaw-bundled",
+            "scope": "project",
+            "origin": "top-level",
+            "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/skill-creator"
+          },
+          "disableModelInvocation": false
+        },
+        {
+          "name": "taskflow",
+          "description": "Use when work should span one or more detached tasks but still behave like one job with a single owner context. TaskFlow is the durable flow substrate under authoring layers like Lobster, ACPX, plugins, or plain code. Keep conditional logic in the caller; use TaskFlow for flow identity, child-task linkage, waiting state, revision-checked mutations, and user-facing emergence.",
+          "filePath": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow/SKILL.md",
+          "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow",
+          "source": "openclaw-bundled",
+          "sourceInfo": {
+            "path": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow/SKILL.md",
+            "source": "openclaw-bundled",
+            "scope": "project",
+            "origin": "top-level",
+            "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow"
+          },
+          "disableModelInvocation": false
+        },
+        {
+          "name": "taskflow-inbox-triage",
+          "description": "Example TaskFlow authoring pattern for inbox triage. Use when messages need different treatment based on intent, with some routes notifying immediately, some waiting on outside answers, and others rolling into a later summary.",
+          "filePath": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow-inbox-triage/SKILL.md",
+          "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow-inbox-triage",
+          "source": "openclaw-bundled",
+          "sourceInfo": {
+            "path": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow-inbox-triage/SKILL.md",
+            "source": "openclaw-bundled",
+            "scope": "project",
+            "origin": "top-level",
+            "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow-inbox-triage"
+          },
+          "disableModelInvocation": false
+        },
+        {
+          "name": "weather",
+          "description": "Get current weather and forecasts via wttr.in or Open-Meteo. Use when: user asks about weather, temperature, or forecasts for any location. NOT for: historical weather data, severe weather alerts, or detailed meteorological analysis. No API key needed.",
+          "filePath": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/weather/SKILL.md",
+          "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/weather",
+          "source": "openclaw-bundled",
+          "sourceInfo": {
+            "path": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/weather/SKILL.md",
+            "source": "openclaw-bundled",
+            "scope": "project",
+            "origin": "top-level",
+            "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/weather"
+          },
+          "disableModelInvocation": false
+        }
+      ],
+      "version": 0
+    },
+    "sessionFile": "/logs/agent/openclaw-sessions/c638fe83-92d7-4dda-98a1-6f51987c846d.jsonl",
+    "compactionCheckpoints": [
+      {
+        "checkpointId": "efd0907c-517a-444a-acd0-a8aa5944e6e2",
+        "sessionKey": "agent:main:main",
+        "sessionId": "c638fe83-92d7-4dda-98a1-6f51987c846d",
+        "createdAt": 1776114999664,
+        "reason": "overflow-retry",
+        "tokensBefore": 146652,
+        "tokensAfter": 20747,
+        "summary": "## Decisions\nNo prior history.\n\n## Open TODOs\nNone.\n\n## Constraints/Rules\nNone.\n\n## Pending user asks\nNone.\n\n## Exact identifiers\nNone captured.\n\n**Turn Context (split turn):**\n\n## Decisions\n- Identified binary as a ray tracer generating 800x600 PPM images\n- Decoded IEEE 754 float constants from rodata section\n- Mapped scene elements: sky gradient, red sphere, checkerboard floor\n\n## Open TODOs\n- Write the C ray tracer implementation at /app/mystery.c\n- Verify output matches original binary exactly\n- Ensure compressed size <2k\n\n## Constraints/Rules\n- C program must be <2k when compressed (`cat mystery.c | gzip | wc`)\n- Must not invoke ./mystery\n- Must work in complete isolation\n- Must compile with `gcc -static -o reversed mystery.c -lm`\n- Output must be identical to running ./mystery\n\n## Pending user asks\n- Create /app/mystery.c that produces identical output to /app/mystery\n\n## Exact identifiers\n- Binary path: `/app/mystery`\n- Output C file: `/app/mystery.c`\n- Output image: `/app/image.ppm`\n- Image format: P3 800x600 255 (ASCII PPM)\n- Sky colors: top ~RGB(159,197,255), horizon ~RGB(191,217,255)\n- Red sphere: center ~(col 400, row 300-340), dark red RGB(51,10,10)\n- Checkerboard floor: gray RGB(152,152,152) and dark gray RGB(67,67,67)\n\n**Decoded constants from binary:**\n- 4.0 (aspect scale), 0.001, 0.0001, 0.2 (sphere radius?)\n- 0.9, 0.4, -1.5, 0.8\n- 100.0, 600.0 (height), 599.0, 799.0\n- 2.666667, 1.333333 (aspect ratios)\n- 0.0, 1.0, 3.0\n- Sphere center components: -5.0, 1.0, -0.5\n\n<workspace-critical-rules>\n## Every Session\n\nBefore doing anything else:\n\n1. Read `SOUL.md` — this is who you are\n2. Read `USER.md` — this is who you're helping\n3. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context\n4. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`\n\nDon't ask permission. Just do it.\n\n## Safety\n\n- Don't exfiltrate private data. Ever.\n- Don't run destructive commands without asking.\n- `trash` > `rm` (recoverable beats gone forever)\n- When in doubt, ask.\n</workspace-critical-rules>",
+        "firstKeptEntryId": "22e5207b",
+        "preCompaction": {
+          "sessionId": "c638fe83-92d7-4dda-98a1-6f51987c846d",
+          "sessionFile": "/logs/agent/openclaw-sessions/c638fe83-92d7-4dda-98a1-6f51987c846d.checkpoint.44ece094-1877-4801-b1fe-7785d91e2950.jsonl",
+          "leafId": "2ae23fc7"
+        },
+        "postCompaction": {
+          "sessionId": "c638fe83-92d7-4dda-98a1-6f51987c846d",
+          "sessionFile": "/logs/agent/openclaw-sessions/c638fe83-92d7-4dda-98a1-6f51987c846d.jsonl",
+          "leafId": "98234ea4",
+          "entryId": "98234ea4"
+        }
+      }
+    ]
+  }
+}

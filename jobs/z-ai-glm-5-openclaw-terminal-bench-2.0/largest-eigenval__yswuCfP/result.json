@@ -1,0 +1,99 @@
+{
+    "id": "12e059fd-26cc-42ab-8025-d899afc858db",
+    "task_name": "largest-eigenval",
+    "trial_name": "largest-eigenval__yswuCfP",
+    "trial_uri": "file:///Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/largest-eigenval__yswuCfP",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "largest-eigenval"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "7d9e8c734dc7ccaa01db7fe48f36a6a49d6827d6fd47fe043cb5f4fe3b0a3fd0",
+    "config": {
+        "task": {
+            "path": "largest-eigenval",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "largest-eigenval__yswuCfP",
+        "trials_dir": "/Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/jobs/z-ai-glm-5-openclaw-terminal-bench-2.0",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": 4.0,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "openai/z-ai/glm-5",
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "3df6613c-4502-49a1-8f39-1099075e2aa7"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "unknown",
+        "model_info": {
+            "name": "z-ai/glm-5",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 38971,
+        "n_cache_tokens": 644661,
+        "n_output_tokens": 19459,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-13T20:14:27.251064Z",
+    "finished_at": "2026-04-13T20:29:52.999305Z",
+    "environment_setup": {
+        "started_at": "2026-04-13T20:14:27.252926Z",
+        "finished_at": "2026-04-13T20:14:41.864818Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-13T20:14:41.864856Z",
+        "finished_at": "2026-04-13T20:20:01.799090Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-13T20:20:01.799165Z",
+        "finished_at": "2026-04-13T20:29:39.752722Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-13T20:29:39.752853Z",
+        "finished_at": "2026-04-13T20:29:50.843277Z"
+    }
+}

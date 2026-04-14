@@ -1,0 +1,1 @@
+[tools] image failed: image required raw_params={"path":"/app/image.ppm","prompt":"Describe this image in detail. What does it depict? Is there a sun, horizon, checkerboard pattern, or other elements? What are the main colors and shapes?"}

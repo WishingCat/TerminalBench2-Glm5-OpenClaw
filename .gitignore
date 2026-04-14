@@ -1,0 +1,17 @@
+# Ignore everything by default
+*
+
+# Allow job results directory structure
+!jobs/
+!jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/
+!jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/config.json
+!jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/result.json
+!jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/job.log
+
+# Allow PASS and FAIL trial directories (will add explicitly)
+!jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/*__*/
+!jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/*__*/**
+
+# Keep gitignore and README
+!.gitignore
+!README.md

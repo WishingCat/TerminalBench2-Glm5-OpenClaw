@@ -1,0 +1,40 @@
+Auth profile written for provider: openai
+=== OpenClaw Config ===
+{
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "openai/z-ai/glm-5"
+      },
+      "skipBootstrap": true,
+      "timeoutSeconds": 86400,
+      "workspace": "/app"
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "openai": {
+        "baseUrl": "https://openai.sufy.com/v1",
+        "api": "openai-completions",
+        "apiKey": "OPENAI_API_KEY",
+        "models": []
+      }
+    }
+  }
+}
+=== Auth Profiles ===
+-rw-r--r-- 1 root root 197 Apr 13 19:59 /root/.openclaw/agents/main/agent/auth-profiles.json
+
+=== Auth Profiles (redacted) ===
+{
+  "version": 1,
+  "profiles": {
+    "openai": {
+      "type": "api_key",
+      "provider": "openai",
+      "key": "sk-bd614...2ac54b3f"
+    }
+  }
+}
+

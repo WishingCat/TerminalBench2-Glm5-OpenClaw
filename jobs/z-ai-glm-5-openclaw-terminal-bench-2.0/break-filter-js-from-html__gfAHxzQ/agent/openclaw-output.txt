@@ -1,0 +1,3 @@
+[tools] exec failed: exec preflight: complex interpreter invocation detected; refusing to run without script preflight validation. Use a direct `python <file>.py` or `node <file>.js` command. raw_params={"command":"cd /app && python test_outputs.py 2>&1","timeout":30}
+[tools] exec failed: exec preflight: complex interpreter invocation detected; refusing to run without script preflight validation. Use a direct `python <file>.py` or `node <file>.js` command. raw_params={"command":"cp /app/out.html /tmp/test.html && python /app/filter.py /tmp/test.html && cat /tmp/test.html"}
+[tools] read failed: ENOENT: no such file or directory, access '/tests/filter.py' raw_params={"path":"/tests/filter.py"}
