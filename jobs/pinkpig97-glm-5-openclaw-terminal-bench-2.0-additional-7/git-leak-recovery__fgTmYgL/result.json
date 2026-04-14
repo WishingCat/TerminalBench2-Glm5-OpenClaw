@@ -1,0 +1,107 @@
+{
+    "id": "96cd4a2e-4e39-4dc0-9539-aa7593e6e81e",
+    "task_name": "git-leak-recovery",
+    "trial_name": "git-leak-recovery__fgTmYgL",
+    "trial_uri": "file:///Users/jameszhu/Projects/terminal-bench/jobs/tb2-openclaw-sf-glm5-git-leak-recovery-20260414-121057/git-leak-recovery__fgTmYgL",
+    "task_id": {
+        "path": "/Users/jameszhu/Projects/terminal-bench/repos/terminal-bench-2/git-leak-recovery"
+    },
+    "source": "terminal-bench-2",
+    "task_checksum": "90c384df7fe78f4d2cfd2ab18fb54c5ee0452683d5c19461fd022c262ffba0eb",
+    "config": {
+        "task": {
+            "path": "/Users/jameszhu/Projects/terminal-bench/repos/terminal-bench-2/git-leak-recovery",
+            "git_url": null,
+            "git_commit_id": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench-2"
+        },
+        "trial_name": "git-leak-recovery__fgTmYgL",
+        "trials_dir": "/Users/jameszhu/Projects/terminal-bench/jobs/tb2-openclaw-sf-glm5-git-leak-recovery-20260414-121057",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": 10.0,
+        "environment_build_timeout_multiplier": 2.0,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "siliconflow/Pro/zai-org/GLM-5",
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "context_window": 200000,
+                "max_tokens": 8192,
+                "temperature": 0,
+                "model_params": {
+                    "enable_thinking": false,
+                    "temperature": 0.0,
+                    "maxTokens": 8192
+                },
+                "thinking": "off"
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "f1f46005-228a-4b6f-9c21-f3bcc0953293"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "unknown",
+        "model_info": {
+            "name": "Pro/zai-org/GLM-5",
+            "provider": "siliconflow"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 3204,
+        "n_cache_tokens": 123072,
+        "n_output_tokens": 2113,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-14T04:11:00.233099Z",
+    "finished_at": "2026-04-14T04:22:04.655323Z",
+    "environment_setup": {
+        "started_at": "2026-04-14T04:11:00.234216Z",
+        "finished_at": "2026-04-14T04:11:49.371849Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-14T04:11:49.371922Z",
+        "finished_at": "2026-04-14T04:17:42.840732Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-14T04:17:42.840913Z",
+        "finished_at": "2026-04-14T04:20:49.854399Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-14T04:20:49.899981Z",
+        "finished_at": "2026-04-14T04:21:53.540280Z"
+    }
+}

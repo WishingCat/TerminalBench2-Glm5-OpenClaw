@@ -1,0 +1,58 @@
+Added model params: [ 'enable_thinking', 'thinking_budget', 'temperature', 'maxTokens' ]
+Auth profile written for provider: siliconflow
+=== OpenClaw Config ===
+{
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "siliconflow/Pro/zai-org/GLM-5"
+      },
+      "skipBootstrap": true,
+      "timeoutSeconds": 86400,
+      "workspace": "/app",
+      "models": {
+        "siliconflow/Pro/zai-org/GLM-5": {
+          "params": {
+            "enable_thinking": true,
+            "thinking_budget": 4096,
+            "temperature": 0,
+            "maxTokens": 8192
+          }
+        }
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "siliconflow": {
+        "baseUrl": "https://api.siliconflow.cn/v1",
+        "api": "openai-completions",
+        "apiKey": "SILICONFLOW_API_KEY",
+        "models": [
+          {
+            "id": "Pro/zai-org/GLM-5",
+            "name": "Pro/zai-org/GLM-5",
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          }
+        ]
+      }
+    }
+  }
+}
+=== Auth Profiles ===
+-rw-r--r-- 1 root root 191 Apr 13 23:40 /root/.openclaw/agents/main/agent/auth-profiles.json
+
+=== Auth Profiles (redacted) ===
+{
+  "version": 1,
+  "profiles": {
+    "siliconflow": {
+      "type": "api_key",
+      "provider": "siliconflow",
+      "key": "sk-nyrny...gfzvaaid"
+    }
+  }
+}
+

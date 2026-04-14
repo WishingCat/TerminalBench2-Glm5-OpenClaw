@@ -1,0 +1,98 @@
+# Source NVM explicitly
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+# Update openclaw.json with model, provider config, and model params
+node << 'NODE_EOF'
+const fs = require("fs");
+const path = require("path");
+
+const configPath = path.join(process.env.HOME, ".openclaw", "openclaw.json");
+const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
+
+// Update model
+config.agents.defaults.model.primary = "siliconflow/Pro/zai-org/GLM-5";
+
+// Add provider config
+const providerConfig = {
+    "baseUrl": "https://api.siliconflow.cn/v1",
+    "api": "openai-completions",
+    "apiKey": "SILICONFLOW_API_KEY",
+    "models": [
+        {
+            "id": "Pro/zai-org/GLM-5",
+            "name": "Pro/zai-org/GLM-5",
+            "contextWindow": 200000,
+            "maxTokens": 8192
+        }
+    ]
+};
+config.models.providers["siliconflow"] = providerConfig;
+
+// Add model params if provided
+const modelParams = {
+    "enable_thinking": true,
+    "thinking_budget": 4096,
+    "temperature": 0.0,
+    "maxTokens": 8192
+};
+if (Object.keys(modelParams).length > 0) {
+    if (!config.agents.defaults.models) config.agents.defaults.models = {};
+    config.agents.defaults.models["siliconflow/Pro/zai-org/GLM-5"] = { params: modelParams };
+    console.log("Added model params:", Object.keys(modelParams));
+}
+
+// Set thinking level if provided
+const thinkingLevel = "";
+if (thinkingLevel) {
+    config.agents.defaults.thinkingDefault = thinkingLevel;
+    console.log("Set thinkingDefault:", thinkingLevel);
+}
+
+fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+
+// Write auth profiles (API key read from process.env at runtime —
+// avoids bash heredoc expansion issues in sandboxed environments)
+const authProfiles = {
+    version: 1,
+    profiles: {
+        ["siliconflow"]: {
+            type: "api_key",
+            provider: "siliconflow",
+            key: process.env["SILICONFLOW_API_KEY"] || ""
+        }
+    }
+};
+const authPath = path.join(process.env.HOME, ".openclaw", "agents", "main", "agent", "auth-profiles.json");
+fs.writeFileSync(authPath, JSON.stringify(authProfiles, null, 2));
+if (!authProfiles.profiles["siliconflow"].key) {
+    console.log("WARNING: " + "SILICONFLOW_API_KEY" + " not found in environment!");
+} else {
+    console.log("Auth profile written for provider: " + "siliconflow");
+}
+NODE_EOF
+
+# Ensure the default session directory exists.
+# Docker-mounted task environments can expose /logs/agent as read-only, so for
+# local runs we rely on Harbor's captured stdout.txt instead of writing there.
+mkdir -p ~/.openclaw/agents/main/sessions
+
+# Verify config
+echo "=== OpenClaw Config ==="
+cat ~/.openclaw/openclaw.json
+echo ""
+echo "=== Auth Profiles ==="
+ls -lh ~/.openclaw/agents/main/agent/auth-profiles.json
+echo ""
+echo "=== Auth Profiles (redacted) ==="
+echo '{
+  "version": 1,
+  "profiles": {
+    "siliconflow": {
+      "type": "api_key",
+      "provider": "siliconflow",
+      "key": "sk-nyrny...gfzvaaid"
+    }
+  }
+}'
+echo ""

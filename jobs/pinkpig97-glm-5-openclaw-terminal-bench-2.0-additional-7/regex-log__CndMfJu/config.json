@@ -1,0 +1,56 @@
+{
+    "task": {
+        "path": "/Users/jameszhu/Projects/terminal-bench/repos/terminal-bench-2/regex-log",
+        "git_url": null,
+        "git_commit_id": null,
+        "overwrite": false,
+        "download_dir": null,
+        "source": "terminal-bench-2"
+    },
+    "trial_name": "regex-log__CndMfJu",
+    "trials_dir": "/Users/jameszhu/Projects/terminal-bench/jobs/tb2-openclaw-sf-glm5-smoke-20260414-015339",
+    "timeout_multiplier": 1.0,
+    "agent_timeout_multiplier": null,
+    "verifier_timeout_multiplier": null,
+    "agent_setup_timeout_multiplier": 5.0,
+    "environment_build_timeout_multiplier": null,
+    "agent": {
+        "name": "openclaw",
+        "import_path": null,
+        "model_name": "siliconflow/Pro/zai-org/GLM-5",
+        "override_timeout_sec": null,
+        "override_setup_timeout_sec": null,
+        "max_timeout_sec": null,
+        "kwargs": {
+            "context_window": 200000,
+            "max_tokens": 8192,
+            "temperature": 0,
+            "model_params": {
+                "enable_thinking": true,
+                "thinking_budget": 4096,
+                "temperature": 0.0,
+                "maxTokens": 8192
+            }
+        },
+        "env": {}
+    },
+    "environment": {
+        "type": "docker",
+        "import_path": null,
+        "force_build": false,
+        "delete": false,
+        "override_cpus": null,
+        "override_memory_mb": null,
+        "override_storage_mb": null,
+        "override_gpus": null,
+        "suppress_override_warnings": false,
+        "kwargs": {}
+    },
+    "verifier": {
+        "override_timeout_sec": null,
+        "max_timeout_sec": null,
+        "disable": false
+    },
+    "artifacts": [],
+    "job_id": "330cb3c7-4e22-4243-a9d5-b5083fc5c4a7"
+}
