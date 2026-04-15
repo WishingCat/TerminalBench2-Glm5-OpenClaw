@@ -11,12 +11,18 @@
 !jobs/pinkpig97-glm-5-openclaw-terminal-bench-2.0-additional-7/config.json
 !jobs/pinkpig97-glm-5-openclaw-terminal-bench-2.0-additional-7/result.json
 !jobs/pinkpig97-glm-5-openclaw-terminal-bench-2.0-additional-7/README.md
+!jobs/pinkpig97-glm-5-openclaw-terminal-bench-2.0-remaining42-pass-5/
+!jobs/pinkpig97-glm-5-openclaw-terminal-bench-2.0-remaining42-pass-5/config.json
+!jobs/pinkpig97-glm-5-openclaw-terminal-bench-2.0-remaining42-pass-5/result.json
+!jobs/pinkpig97-glm-5-openclaw-terminal-bench-2.0-remaining42-pass-5/README.md
 
 # Allow PASS and FAIL trial directories (will add explicitly)
 !jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/*__*/
 !jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/*__*/**
 !jobs/pinkpig97-glm-5-openclaw-terminal-bench-2.0-additional-7/*__*/
 !jobs/pinkpig97-glm-5-openclaw-terminal-bench-2.0-additional-7/*__*/**
+!jobs/pinkpig97-glm-5-openclaw-terminal-bench-2.0-remaining42-pass-5/*__*/
+!jobs/pinkpig97-glm-5-openclaw-terminal-bench-2.0-remaining42-pass-5/*__*/**
 
 # Keep gitignore and README
 !.gitignore
