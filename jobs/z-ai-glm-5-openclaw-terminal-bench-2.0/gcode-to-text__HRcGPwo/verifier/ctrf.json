@@ -1,0 +1,41 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 1,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1776273336.0823324,
+            "stop": 1776273336.1373827
+        },
+        "tests": [
+            {
+                "name": "test_outputs.py::test_hello_file_exists",
+                "status": "passed",
+                "duration": 0.00038058299105614424,
+                "start": 1776273336.1285765,
+                "stop": 1776273336.129577,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_hello_file_content",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0006454160320572555,
+                "start": 1776273336.129709,
+                "stop": 1776273336.1370556,
+                "retries": 0,
+                "file_path": "test_outputs.py",
+                "trace": "def test_hello_file_content():\n        \"\"\"Test that out.txt contains exactly the flag.\"\"\"\n        hello_path = Path(\"/app/out.txt\")\n    \n>       assert hello_path.read_text().strip() == \"flag{gc0d3_iz_ch4LLenGiNg}\", (\n            f\"Expected the correct flag but got '{hello_path.read_text().strip()}'\"\n        )\nE       AssertionError: Expected the correct flag but got 'HELLO'\nE       assert 'HELLO' == 'flag{gc0d3_iz_ch4LLenGiNg}'\nE         \nE         - flag{gc0d3_iz_ch4LLenGiNg}\nE         + HELLO\n\n/tests/test_outputs.py:17: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

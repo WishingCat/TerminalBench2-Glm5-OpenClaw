@@ -4902,3 +4902,5 @@ Trial constraints-scheduling__FxeKQWz failed: Docker compose command failed for 
 failed to copy: httpReadSeeker: failed open: failed to do request: Get "https://mirror.gcr.io/v2/alexgshaw/constraints-scheduling/blobs/sha256:dacaa4c4b4567b83fe1f6a497ad6d562a963eea3b0ce7e4419d97af5c213526b?ns=docker.io": EOF
 . Stderr: None. 
 Not retrying trial because the maximum number of retries has been reached
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached

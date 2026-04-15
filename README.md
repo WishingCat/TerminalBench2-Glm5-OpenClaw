@@ -12,23 +12,20 @@
 | 已完成 | 89 / 89 |
 | 运行环境 | macOS ARM (Docker + Rosetta amd64 emulation) |
 | 并发数 | 2 |
-| 日期 | 2026-04-13 ~ 2026-04-15 |
+| 日期 | 2026-04-13 ~ 2026-04-16 |
 
 ## 结果汇总
 
 | 分类 | 数量 | 说明 |
 |------|------|------|
-| PASS | 34 | 模型成功完成任务 (reward=1.0) |
-| FAIL | 47 | 模型运行但未通过验证 (reward=0.0 或 verifier 无输出) |
-| ERROR | 8 | 基础设施问题，模型未获得公平的尝试机会 |
+| PASS | 37 | 模型成功完成任务 (reward=1.0) |
+| FAIL | 52 | 模型运行但未通过验证 (reward=0.0 或 verifier 无输出) |
 
-**通过率 (全部)**: 34 / 89 = **38.2%**
-
-**通过率 (排除基础设施错误)**: 34 / 81 = **42.0%**
+**通过率**: 37 / 89 = **41.6%**
 
 ## 详细结果
 
-### PASS (34)
+### PASS (37)
 
 | 任务 | Agent 用时 | 总用时 | 备注 |
 |------|-----------|--------|------|
@@ -36,13 +33,16 @@
 | build-pmars | 6m39s | 11m41s | |
 | cobol-modernization | 15m00s | 20m57s | AgentTimeoutError (超时但已完成) |
 | code-from-image | 4m29s | 8m20s | |
+| compile-compcert | 37m06s | 40m26s | |
 | configure-git-webserver | 14m59s | 21m06s | AgentTimeoutError (超时但已完成) |
+| constraints-scheduling | 3m00s | 6m10s | |
 | crack-7z-hash | 8m34s | 15m13s | |
 | custom-memory-heap-crash | 6m03s | 13m08s | |
 | financial-document-processor | 6m39s | 10m52s | |
 | fix-code-vulnerability | 5m07s | 8m51s | |
 | fix-git | 1m41s | 23m37s | |
 | fix-ocaml-gc | 42m01s | 64m40s | |
+| hf-model-inference | 2m15s | 11m05s | |
 | kv-store-grpc | 15m00s | 18m29s | AgentTimeoutError (超时但已完成) |
 | large-scale-text-editing | 11m41s | 16m39s | |
 | largest-eigenval | 9m37s | 15m25s | |
@@ -67,13 +67,14 @@
 | tune-mjcf | 9m27s | 13m49s | |
 | vulnerable-secret | 2m40s | 7m08s | |
 
-### FAIL (47)
+### FAIL (52)
 
 | 任务 | Agent 用时 | 总用时 | 备注 |
 |------|-----------|--------|------|
 | adaptive-rejection-sampler | 3m01s | 9m21s | |
 | break-filter-js-from-html | 20m00s | 26m22s | AgentTimeoutError |
 | build-cython-ext | 15m00s | 19m26s | AgentTimeoutError |
+| build-pov-ray | 16m12s | 19m12s | |
 | caffe-cifar-10 | 6m41s | 13m15s | |
 | cancel-async-tasks | 0m55s | 5m16s | |
 | chess-best-move | 1m12s | 7m18s | |
@@ -88,7 +89,9 @@
 | feal-differential-cryptanalysis | 30m00s | 39m39s | AgentTimeoutError |
 | feal-linear-cryptanalysis | 6m10s | 18m13s | |
 | filter-js-from-html | 1m36s | 5m54s | |
+| gcode-to-text | 2m39s | 5m30s | |
 | git-leak-recovery | 1m51s | 6m02s | |
+| git-multibranch | 5m06s | 8m08s | |
 | gpt2-codegolf | 15m00s | 22m13s | AgentTimeoutError |
 | headless-terminal | 2m11s | 13m52s | |
 | install-windows-3.11 | 60m00s | 66m37s | AgentTimeoutError |
@@ -106,31 +109,20 @@
 | polyglot-rust-c | 14m59s | 37m28s | AgentTimeoutError |
 | protein-assembly | 20m24s | 24m11s | |
 | qemu-alpine-ssh | 2m54s | 6m31s | |
+| qemu-startup | 14m59s | 18m10s | AgentTimeoutError |
 | query-optimize | 11m58s | 21m43s | |
 | raman-fitting | 7m09s | 11m02s | |
 | regex-chess | 10m41s | 16m29s | |
 | reshard-c4-data | 14m40s | 23m33s | |
 | rstan-to-pystan | 19m18s | 21m44s | |
 | sam-cell-seg | 5m18s | 11m49s | |
+| schemelike-metacircular-eval | 2m07s | 5m24s | |
 | torch-pipeline-parallelism | 14m59s | 24m09s | AgentTimeoutError |
 | torch-tensor-parallelism | 1m25s | 12m38s | |
 | train-fasttext | 60m00s | 92m46s | AgentTimeoutError |
 | video-processing | 2m42s | 18m37s | |
 | winning-avg-corewars | 20m10s | 25m35s | RewardFileNotFoundError |
 | write-compressor | 4m41s | 11m42s | |
-
-### ERROR (8) - 基础设施问题
-
-| 任务 | 错误类型 | 总用时 | 原因 |
-|------|---------|--------|------|
-| build-pov-ray | CancelledError | 12m06s | 手动终止 Harbor 时被取消 |
-| compile-compcert | RuntimeError | 11m25s | apt-get 网络故障 |
-| constraints-scheduling | RuntimeError | 0m07s | agent setup 网络故障 |
-| gcode-to-text | RuntimeError | 3m06s | agent setup 网络故障 |
-| git-multibranch | RuntimeError | 20m02s | npm install 网络中断 (ECONNRESET) |
-| hf-model-inference | EnvironmentStartTimeoutError | 80m01s | Docker 镜像过大，拉取超时 |
-| qemu-startup | CancelledError | 28m48s | 手动终止 Harbor 时被取消 |
-| schemelike-metacircular-eval | AgentSetupTimeoutError | 24m11s | npm install 超时 (Rosetta 模拟慢) |
 
 ## 错误分类规则
 
@@ -139,11 +131,6 @@
   - reward = 0.0 (验证未通过)
   - AgentTimeoutError (模型超时但未解决)
   - RewardFileNotFoundError / RewardFileEmptyError (验证器无输出)
-- **ERROR**: 基础设施故障，模型未获得公平机会
-  - EnvironmentStartTimeoutError (Docker 镜像拉取/启动超时)
-  - AgentSetupTimeoutError (OpenClaw 安装超时)
-  - CancelledError (被手动取消)
-  - RuntimeError (网络/系统故障)
 
 ## 目录结构
 
@@ -185,4 +172,4 @@ jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/
 - 所有任务在 macOS ARM 上通过 Docker Desktop (Rosetta amd64 emulation) 运行，Agent 安装耗时较长 (5-24 分钟)
 - 8 个 PASS 任务虽触发了 AgentTimeoutError，但在超时前已完成答题并通过验证
 - 4 个 FAIL 任务因 RewardFileNotFoundError 失败，可能是验证脚本执行异常
-- 8 个 ERROR 任务中，4 个为网络故障 (RuntimeError)、2 个被手动取消 (CancelledError)、1 个 Docker 镜像超时、1 个 npm 安装超时
+- 首轮运行有 8 个 ERROR（基础设施问题），重跑后全部消除：3 个转为 PASS，5 个转为 FAIL

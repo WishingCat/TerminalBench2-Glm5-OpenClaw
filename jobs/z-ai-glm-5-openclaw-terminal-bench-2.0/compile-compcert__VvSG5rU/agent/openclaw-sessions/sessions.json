@@ -1,0 +1,479 @@
+{
+  "agent:main:main": {
+    "sessionId": "f8d8e651-8b39-45d7-be57-87137bb06a64",
+    "updatedAt": 1776272493925,
+    "skillsSnapshot": {
+      "prompt": "\n\nThe following skills provide specialized instructions for specific tasks.\nUse the read tool to load a skill's file when the task matches its description.\nWhen a skill file references a relative path, resolve it against the skill directory (parent of SKILL.md / dirname of the path) and use that absolute path in tool commands.\n\n<available_skills>\n  <skill>\n    <name>healthcheck</name>\n    <description>Host security hardening and risk-tolerance configuration for OpenClaw deployments. Use when a user asks for security audits, firewall/SSH/update hardening, risk posture, exposure review, OpenClaw cron scheduling for periodic checks, or version status checks on a machine running OpenClaw (laptop, workstation, Pi, VPS).</description>\n    <location>/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/healthcheck/SKILL.md</location>\n  </skill>\n  <skill>\n    <name>node-connect</name>\n    <description>Diagnose OpenClaw node connection and pairing failures for Android, iOS, and macOS companion apps. Use when QR/setup code/manual connect fails, local Wi-Fi works but VPS/tailnet does not, or errors mention pairing required, unauthorized, bootstrap token invalid or expired, gateway.bind, gateway.remote.url, Tailscale, or plugins.entries.device-pair.config.publicUrl.</description>\n    <location>/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/node-connect/SKILL.md</location>\n  </skill>\n  <skill>\n    <name>openai-whisper-api</name>\n    <description>Transcribe audio via OpenAI Audio Transcriptions API (Whisper).</description>\n    <location>/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/openai-whisper-api/SKILL.md</location>\n  </skill>\n  <skill>\n    <name>skill-creator</name>\n    <description>Create, edit, improve, or audit AgentSkills. Use when creating a new skill from scratch or when asked to improve, review, audit, tidy up, or clean up an existing skill or SKILL.md file. Also use when editing or restructuring a skill directory (moving files to references/ or scripts/, removing stale content, validating against the AgentSkills spec). Triggers on phrases like &quot;create a skill&quot;, &quot;author a skill&quot;, &quot;tidy up a skill&quot;, &quot;improve this skill&quot;, &quot;review the skill&quot;, &quot;clean up the skill&quot;, &quot;audit the skill&quot;.</description>\n    <location>/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/skill-creator/SKILL.md</location>\n  </skill>\n  <skill>\n    <name>taskflow</name>\n    <description>Use when work should span one or more detached tasks but still behave like one job with a single owner context. TaskFlow is the durable flow substrate under authoring layers like Lobster, ACPX, plugins, or plain code. Keep conditional logic in the caller; use TaskFlow for flow identity, child-task linkage, waiting state, revision-checked mutations, and user-facing emergence.</description>\n    <location>/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow/SKILL.md</location>\n  </skill>\n  <skill>\n    <name>taskflow-inbox-triage</name>\n    <description>Example TaskFlow authoring pattern for inbox triage. Use when messages need different treatment based on intent, with some routes notifying immediately, some waiting on outside answers, and others rolling into a later summary.</description>\n    <location>/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow-inbox-triage/SKILL.md</location>\n  </skill>\n  <skill>\n    <name>weather</name>\n    <description>Get current weather and forecasts via wttr.in or Open-Meteo. Use when: user asks about weather, temperature, or forecasts for any location. NOT for: historical weather data, severe weather alerts, or detailed meteorological analysis. No API key needed.</description>\n    <location>/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/weather/SKILL.md</location>\n  </skill>\n</available_skills>",
+      "skills": [
+        {
+          "name": "healthcheck"
+        },
+        {
+          "name": "node-connect"
+        },
+        {
+          "name": "openai-whisper-api",
+          "primaryEnv": "OPENAI_API_KEY",
+          "requiredEnv": [
+            "OPENAI_API_KEY"
+          ]
+        },
+        {
+          "name": "skill-creator"
+        },
+        {
+          "name": "taskflow"
+        },
+        {
+          "name": "taskflow-inbox-triage"
+        },
+        {
+          "name": "weather",
+          "requiredEnv": []
+        }
+      ],
+      "resolvedSkills": [
+        {
+          "name": "healthcheck",
+          "description": "Host security hardening and risk-tolerance configuration for OpenClaw deployments. Use when a user asks for security audits, firewall/SSH/update hardening, risk posture, exposure review, OpenClaw cron scheduling for periodic checks, or version status checks on a machine running OpenClaw (laptop, workstation, Pi, VPS).",
+          "filePath": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/healthcheck/SKILL.md",
+          "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/healthcheck",
+          "source": "openclaw-bundled",
+          "sourceInfo": {
+            "path": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/healthcheck/SKILL.md",
+            "source": "openclaw-bundled",
+            "scope": "project",
+            "origin": "top-level",
+            "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/healthcheck"
+          },
+          "disableModelInvocation": false
+        },
+        {
+          "name": "node-connect",
+          "description": "Diagnose OpenClaw node connection and pairing failures for Android, iOS, and macOS companion apps. Use when QR/setup code/manual connect fails, local Wi-Fi works but VPS/tailnet does not, or errors mention pairing required, unauthorized, bootstrap token invalid or expired, gateway.bind, gateway.remote.url, Tailscale, or plugins.entries.device-pair.config.publicUrl.",
+          "filePath": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/node-connect/SKILL.md",
+          "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/node-connect",
+          "source": "openclaw-bundled",
+          "sourceInfo": {
+            "path": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/node-connect/SKILL.md",
+            "source": "openclaw-bundled",
+            "scope": "project",
+            "origin": "top-level",
+            "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/node-connect"
+          },
+          "disableModelInvocation": false
+        },
+        {
+          "name": "openai-whisper-api",
+          "description": "Transcribe audio via OpenAI Audio Transcriptions API (Whisper).",
+          "filePath": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/openai-whisper-api/SKILL.md",
+          "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/openai-whisper-api",
+          "source": "openclaw-bundled",
+          "sourceInfo": {
+            "path": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/openai-whisper-api/SKILL.md",
+            "source": "openclaw-bundled",
+            "scope": "project",
+            "origin": "top-level",
+            "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/openai-whisper-api"
+          },
+          "disableModelInvocation": false
+        },
+        {
+          "name": "skill-creator",
+          "description": "Create, edit, improve, or audit AgentSkills. Use when creating a new skill from scratch or when asked to improve, review, audit, tidy up, or clean up an existing skill or SKILL.md file. Also use when editing or restructuring a skill directory (moving files to references/ or scripts/, removing stale content, validating against the AgentSkills spec). Triggers on phrases like \"create a skill\", \"author a skill\", \"tidy up a skill\", \"improve this skill\", \"review the skill\", \"clean up the skill\", \"audit the skill\".",
+          "filePath": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/skill-creator/SKILL.md",
+          "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/skill-creator",
+          "source": "openclaw-bundled",
+          "sourceInfo": {
+            "path": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/skill-creator/SKILL.md",
+            "source": "openclaw-bundled",
+            "scope": "project",
+            "origin": "top-level",
+            "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/skill-creator"
+          },
+          "disableModelInvocation": false
+        },
+        {
+          "name": "taskflow",
+          "description": "Use when work should span one or more detached tasks but still behave like one job with a single owner context. TaskFlow is the durable flow substrate under authoring layers like Lobster, ACPX, plugins, or plain code. Keep conditional logic in the caller; use TaskFlow for flow identity, child-task linkage, waiting state, revision-checked mutations, and user-facing emergence.",
+          "filePath": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow/SKILL.md",
+          "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow",
+          "source": "openclaw-bundled",
+          "sourceInfo": {
+            "path": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow/SKILL.md",
+            "source": "openclaw-bundled",
+            "scope": "project",
+            "origin": "top-level",
+            "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow"
+          },
+          "disableModelInvocation": false
+        },
+        {
+          "name": "taskflow-inbox-triage",
+          "description": "Example TaskFlow authoring pattern for inbox triage. Use when messages need different treatment based on intent, with some routes notifying immediately, some waiting on outside answers, and others rolling into a later summary.",
+          "filePath": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow-inbox-triage/SKILL.md",
+          "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow-inbox-triage",
+          "source": "openclaw-bundled",
+          "sourceInfo": {
+            "path": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow-inbox-triage/SKILL.md",
+            "source": "openclaw-bundled",
+            "scope": "project",
+            "origin": "top-level",
+            "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/taskflow-inbox-triage"
+          },
+          "disableModelInvocation": false
+        },
+        {
+          "name": "weather",
+          "description": "Get current weather and forecasts via wttr.in or Open-Meteo. Use when: user asks about weather, temperature, or forecasts for any location. NOT for: historical weather data, severe weather alerts, or detailed meteorological analysis. No API key needed.",
+          "filePath": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/weather/SKILL.md",
+          "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/weather",
+          "source": "openclaw-bundled",
+          "sourceInfo": {
+            "path": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/weather/SKILL.md",
+            "source": "openclaw-bundled",
+            "scope": "project",
+            "origin": "top-level",
+            "baseDir": "/opt/node-v22.22.2-linux-x64/lib/node_modules/openclaw/skills/weather"
+          },
+          "disableModelInvocation": false
+        }
+      ],
+      "version": 0
+    },
+    "sessionFile": "/logs/agent/openclaw-sessions/f8d8e651-8b39-45d7-be57-87137bb06a64.jsonl",
+    "compactionCheckpoints": [
+      {
+        "checkpointId": "7192c9e3-8c4f-4348-9de3-736372859db3",
+        "sessionKey": "agent:main:main",
+        "sessionId": "f8d8e651-8b39-45d7-be57-87137bb06a64",
+        "createdAt": 1776272040140,
+        "reason": "overflow-retry",
+        "tokensBefore": 82633,
+        "tokensAfter": 19249,
+        "summary": "## Decisions\nNo prior history.\n\n## Open TODOs\nNone.\n\n## Constraints/Rules\nNone.\n\n## Pending user asks\nNone.\n\n## Exact identifiers\nNone captured.\n\n**Turn Context (split turn):**\n\n## Goal\nBuild CompCert C verified compiler version 3.13.1 from source under /tmp/CompCert/, configured for x86_64-linux, with ccomp executable available at /tmp/CompCert/ccomp.\n\n## Constraints & Preferences\n- CompCert must be version 3.13.1 specifically\n- Must be freshly built from source\n- Must be fully functional\n- Must configure to the development environment's OS and ISA\n\n## Progress\n### Done\n- [x] Identified system: Ubuntu 24.04.3 LTS, x86_64 architecture\n- [x] Installed prerequisites: opam, ocaml, coq, menhir, libgmp-dev, zlib1g-dev, pkg-config\n- [x] Downloaded and extracted CompCert 3.13.1 source to /tmp/CompCert\n- [x] Initialized opam and installed menhir via opam\n- [x] Attempted Coq 8.16.1 installation via opam (failed - OOM killed)\n- [x] Installed external Flocq library (libcoq-flocq 4.1.3) compatible with Coq 8.18.0\n- [x] Configured CompCert with `-ignore-coq-version -use-external-Flocq` flags\n\n### In Progress\n- [ ] Building CompCert with `make -j1` (single-threaded to avoid OOM)\n  - Session: mild-summit, pid 30900\n  - Build is progressing, currently processing Coq proofs\n  - Seeing deprecation warnings (app_ass → app_assoc) but no errors yet\n\n### Blocked\n- None currently - build is in progress\n\n## Key Decisions\n- **Used system Coq 8.18.0 with `-ignore-coq-version` flag**: opam Coq 8.16.1 build was OOM killed; system Coq works with warnings\n- **Used external Flocq 4.1.3**: Bundled Flocq in CompCert 3.13.1 incompatible with Coq 8.18.0 (missing `Z_div_mod_eq`)\n- **Single-threaded build (`-j1`)**: Parallel build caused OOM kills\n\n## Next Steps\n1. Wait for current `make -j1` build to complete (session mild-summit)\n2. Run `make install` to install binaries to /tmp/CompCert/bin\n3. Verify ccomp is available at /tmp/CompCert/ccomp (may need symlink from /tmp/CompCert/bin/ccomp)\n4. Test CompCert functionality by compiling a simple C program\n\n## Critical Context\n- Configure command used: `./configure x86_64-linux -prefix /tmp/CompCert -ignore-coq-version -use-external-Flocq`\n- Environment: `eval $(opam env)` needed for menhir\n- Build errors encountered:\n  - Coq 8.18.0 unsupported by CompCert 3.13.1 (requires 8.12.0-8.16.1) - bypassed with `-ignore-coq-version`\n  - Flocq error `Z_div_mod_eq not found` - fixed by using external Flocq 4.1.3\n\n## Decisions\n- Use system Coq 8.18.0 with `-ignore-coq-version` instead of compiling Coq 8.16.1 (OOM issues)\n- Use external Flocq 4.1.3 (apt package libcoq-flocq) instead of bundled Flocq\n- Build single-threaded to avoid memory exhaustion\n\n## Open TODOs\n- Complete the CompCert build (in progress)\n- Install and verify ccomp at /tmp/CompCert/ccomp\n- Test compilation functionality\n\n## Constraints/Rules\n- CompCert version must be exactly 3.13.1\n- Target: x86_64-linux\n- Prefix: /tmp/CompCert\n\n## Pending user asks\n- Build CompCert 3.13.1 from source at /tmp/CompCert/\n- Ensure /tmp/CompCert/ccomp is invokable and functional\n\n## Exact identifiers\n- Directory: /tmp/CompCert/\n- Target configuration: x86_64-linux\n- Coq version: 8.18.0 (system)\n- Menhir version: 20260209 (via opam)\n- Flocq version: 4.1.3 (libcoq-flocq package)\n- OCaml version: 4.14.1\n- Current build session: mild-summit (pid 30900)\n- Opam switch: default\n\n<workspace-critical-rules>\n## Every Session\n\nBefore doing anything else:\n\n1. Read `SOUL.md` — this is who you are\n2. Read `USER.md` — this is who you're helping\n3. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context\n4. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`\n\nDon't ask permission. Just do it.\n\n## Safety\n\n- Don't exfiltrate private data. Ever.\n- Don't run destructive commands without asking.\n- `trash` > `rm` (recoverable beats gone forever)\n- When in doubt, ask.\n</workspace-critical-rules>",
+        "firstKeptEntryId": "64e9edc3",
+        "preCompaction": {
+          "sessionId": "f8d8e651-8b39-45d7-be57-87137bb06a64",
+          "sessionFile": "/logs/agent/openclaw-sessions/f8d8e651-8b39-45d7-be57-87137bb06a64.checkpoint.66160006-f878-4104-82c4-da367be73774.jsonl",
+          "leafId": "21303907"
+        },
+        "postCompaction": {
+          "sessionId": "f8d8e651-8b39-45d7-be57-87137bb06a64",
+          "sessionFile": "/logs/agent/openclaw-sessions/f8d8e651-8b39-45d7-be57-87137bb06a64.jsonl",
+          "leafId": "b686e808",
+          "entryId": "b686e808"
+        }
+      }
+    ],
+    "contextTokens": 200000,
+    "modelProvider": "openai",
+    "model": "z-ai/glm-5",
+    "abortedLastRun": false,
+    "systemPromptReport": {
+      "source": "run",
+      "generatedAt": 1776272076497,
+      "sessionId": "f8d8e651-8b39-45d7-be57-87137bb06a64",
+      "sessionKey": "agent:main:main",
+      "provider": "openai",
+      "model": "z-ai/glm-5",
+      "workspaceDir": "/app",
+      "bootstrapMaxChars": 20000,
+      "bootstrapTotalMaxChars": 150000,
+      "bootstrapTruncation": {
+        "warningMode": "once",
+        "warningShown": false,
+        "truncatedFiles": 0,
+        "nearLimitFiles": 0,
+        "totalNearLimit": false
+      },
+      "sandbox": {
+        "mode": "off",
+        "sandboxed": false
+      },
+      "systemPrompt": {
+        "chars": 26799,
+        "projectContextChars": 11374,
+        "nonProjectContextChars": 15425
+      },
+      "injectedWorkspaceFiles": [
+        {
+          "name": "AGENTS.md",
+          "path": "/app/AGENTS.md",
+          "missing": false,
+          "rawChars": 7804,
+          "injectedChars": 7804,
+          "truncated": false
+        },
+        {
+          "name": "SOUL.md",
+          "path": "/app/SOUL.md",
+          "missing": false,
+          "rawChars": 1664,
+          "injectedChars": 1664,
+          "truncated": false
+        },
+        {
+          "name": "TOOLS.md",
+          "path": "/app/TOOLS.md",
+          "missing": false,
+          "rawChars": 850,
+          "injectedChars": 850,
+          "truncated": false
+        },
+        {
+          "name": "IDENTITY.md",
+          "path": "/app/IDENTITY.md",
+          "missing": false,
+          "rawChars": 405,
+          "injectedChars": 405,
+          "truncated": false
+        },
+        {
+          "name": "USER.md",
+          "path": "/app/USER.md",
+          "missing": false,
+          "rawChars": 474,
+          "injectedChars": 474,
+          "truncated": false
+        },
+        {
+          "name": "HEARTBEAT.md",
+          "path": "/app/HEARTBEAT.md",
+          "missing": false,
+          "rawChars": 167,
+          "injectedChars": 167,
+          "truncated": false
+        },
+        {
+          "name": "BOOTSTRAP.md",
+          "path": "/app/BOOTSTRAP.md",
+          "missing": true,
+          "rawChars": 0,
+          "injectedChars": 40,
+          "truncated": false
+        }
+      ],
+      "skills": {
+        "promptChars": 3909,
+        "entries": [
+          {
+            "name": "healthcheck",
+            "blockChars": 506
+          },
+          {
+            "name": "node-connect",
+            "blockChars": 556
+          },
+          {
+            "name": "openai-whisper-api",
+            "blockChars": 264
+          },
+          {
+            "name": "skill-creator",
+            "blockChars": 774
+          },
+          {
+            "name": "taskflow",
+            "blockChars": 558
+          },
+          {
+            "name": "taskflow-inbox-triage",
+            "blockChars": 433
+          },
+          {
+            "name": "weather",
+            "blockChars": 431
+          }
+        ]
+      },
+      "tools": {
+        "listChars": 0,
+        "schemaChars": 31010,
+        "entries": [
+          {
+            "name": "read",
+            "summaryChars": 298,
+            "schemaChars": 304,
+            "propertiesCount": 3
+          },
+          {
+            "name": "edit",
+            "summaryChars": 326,
+            "schemaChars": 834,
+            "propertiesCount": 2
+          },
+          {
+            "name": "write",
+            "summaryChars": 127,
+            "schemaChars": 225,
+            "propertiesCount": 2
+          },
+          {
+            "name": "apply_patch",
+            "summaryChars": 132,
+            "schemaChars": 153,
+            "propertiesCount": 1
+          },
+          {
+            "name": "exec",
+            "summaryChars": 539,
+            "schemaChars": 1098,
+            "propertiesCount": 12
+          },
+          {
+            "name": "process",
+            "summaryChars": 416,
+            "schemaChars": 961,
+            "propertiesCount": 12
+          },
+          {
+            "name": "canvas",
+            "summaryChars": 106,
+            "schemaChars": 661,
+            "propertiesCount": 18
+          },
+          {
+            "name": "nodes",
+            "summaryChars": 118,
+            "schemaChars": 1589,
+            "propertiesCount": 32
+          },
+          {
+            "name": "cron",
+            "summaryChars": 3726,
+            "schemaChars": 6700,
+            "propertiesCount": 13
+          },
+          {
+            "name": "message",
+            "summaryChars": 89,
+            "schemaChars": 5613,
+            "propertiesCount": 105
+          },
+          {
+            "name": "tts",
+            "summaryChars": 152,
+            "schemaChars": 223,
+            "propertiesCount": 2
+          },
+          {
+            "name": "image_generate",
+            "summaryChars": 387,
+            "schemaChars": 1195,
+            "propertiesCount": 10
+          },
+          {
+            "name": "video_generate",
+            "summaryChars": 225,
+            "schemaChars": 3734,
+            "propertiesCount": 20
+          },
+          {
+            "name": "gateway",
+            "summaryChars": 494,
+            "schemaChars": 497,
+            "propertiesCount": 12
+          },
+          {
+            "name": "agents_list",
+            "summaryChars": 118,
+            "schemaChars": 33,
+            "propertiesCount": 0
+          },
+          {
+            "name": "sessions_list",
+            "summaryChars": 177,
+            "schemaChars": 212,
+            "propertiesCount": 4
+          },
+          {
+            "name": "sessions_history",
+            "summaryChars": 180,
+            "schemaChars": 161,
+            "propertiesCount": 3
+          },
+          {
+            "name": "sessions_send",
+            "summaryChars": 208,
+            "schemaChars": 274,
+            "propertiesCount": 5
+          },
+          {
+            "name": "sessions_yield",
+            "summaryChars": 97,
+            "schemaChars": 60,
+            "propertiesCount": 1
+          },
+          {
+            "name": "sessions_spawn",
+            "summaryChars": 302,
+            "schemaChars": 1333,
+            "propertiesCount": 18
+          },
+          {
+            "name": "subagents",
+            "summaryChars": 105,
+            "schemaChars": 191,
+            "propertiesCount": 4
+          },
+          {
+            "name": "session_status",
+            "summaryChars": 336,
+            "schemaChars": 89,
+            "propertiesCount": 2
+          },
+          {
+            "name": "web_search",
+            "summaryChars": 93,
+            "schemaChars": 446,
+            "propertiesCount": 4
+          },
+          {
+            "name": "web_fetch",
+            "summaryChars": 129,
+            "schemaChars": 374,
+            "propertiesCount": 3
+          },
+          {
+            "name": "image",
+            "summaryChars": 201,
+            "schemaChars": 342,
+            "propertiesCount": 6
+          },
+          {
+            "name": "pdf",
+            "summaryChars": 275,
+            "schemaChars": 400,
+            "propertiesCount": 6
+          },
+          {
+            "name": "browser",
+            "summaryChars": 1066,
+            "schemaChars": 2799,
+            "propertiesCount": 48
+          },
+          {
+            "name": "memory_search",
+            "summaryChars": 385,
+            "schemaChars": 260,
+            "propertiesCount": 4
+          },
+          {
+            "name": "memory_get",
+            "summaryChars": 207,
+            "schemaChars": 249,
+            "propertiesCount": 4
+          }
+        ]
+      }
+    },
+    "inputTokens": 160752,
+    "outputTokens": 8200,
+    "totalTokens": 54464,
+    "totalTokensFresh": true,
+    "cacheRead": 2119704,
+    "cacheWrite": 0,
+    "compactionCount": 1
+  }
+}
