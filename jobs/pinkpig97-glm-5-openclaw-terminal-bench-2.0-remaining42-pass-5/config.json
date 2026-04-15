@@ -1,0 +1,12 @@
+{
+  "job_name": "pinkpig97-glm-5-openclaw-terminal-bench-2.0-remaining42-pass-5",
+  "source": "supplemental aggregate of local Harbor/OpenClaw remaining42 PASS trials",
+  "model": "siliconflow/Pro/zai-org/GLM-5",
+  "agent": "openclaw",
+  "n_trials": 5,
+  "notes": [
+    "These trials were copied from the remaining42 campaign and intentionally kept separate from the original 40-task batch.",
+    "All included trials are verifier PASS artifacts with reward 1.0.",
+    "Trial contents follow local Harbor output and preserve the original agent and verifier subdirectories."
+  ]
+}

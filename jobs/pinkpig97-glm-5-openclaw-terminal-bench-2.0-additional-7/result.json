@@ -1,0 +1,56 @@
+{
+  "job_name": "pinkpig97-glm-5-openclaw-terminal-bench-2.0-additional-7",
+  "base_repository": "WishingCat/TerminalBench2-Glm5-OpenClaw",
+  "summary": {
+    "n_trials": 7,
+    "pass": 5,
+    "fail": 2,
+    "error": 0,
+    "pass_rate_all_completed": 0.7142857142857143
+  },
+  "tasks": [
+    {
+      "task_name": "git-leak-recovery",
+      "trial_name": "git-leak-recovery__fgTmYgL",
+      "status": "PASS",
+      "reward": 1.0
+    },
+    {
+      "task_name": "install-windows-3.11",
+      "trial_name": "install-windows-3.11__UKXuJS7",
+      "status": "FAIL",
+      "reward": 0.0,
+      "note": "phase timestamps missing in local result.json"
+    },
+    {
+      "task_name": "large-scale-text-editing",
+      "trial_name": "large-scale-text-editing__m6FG8kf",
+      "status": "FAIL",
+      "reward": 0.0
+    },
+    {
+      "task_name": "nginx-request-logging",
+      "trial_name": "nginx-request-logging__BvRHNWt",
+      "status": "PASS",
+      "reward": 1.0
+    },
+    {
+      "task_name": "openssl-selfsigned-cert",
+      "trial_name": "openssl-selfsigned-cert__hbBzjc2",
+      "status": "PASS",
+      "reward": 1.0
+    },
+    {
+      "task_name": "regex-log",
+      "trial_name": "regex-log__CndMfJu",
+      "status": "PASS",
+      "reward": 1.0
+    },
+    {
+      "task_name": "vulnerable-secret",
+      "trial_name": "vulnerable-secret__y8y2RNZ",
+      "status": "PASS",
+      "reward": 1.0
+    }
+  ]
+}

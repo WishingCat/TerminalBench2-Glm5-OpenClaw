@@ -1,0 +1,12 @@
+{
+  "job_name": "pinkpig97-glm-5-openclaw-terminal-bench-2.0-additional-7",
+  "source": "supplemental aggregate of local Harbor/OpenClaw trials",
+  "model": "siliconflow/Pro/zai-org/GLM-5",
+  "agent": "openclaw",
+  "n_trials": 7,
+  "notes": [
+    "These trials were copied from multiple local runs and intentionally kept separate from the original 40-task batch.",
+    "Trial contents follow local Harbor output and may omit openclaw-output/session files in some runs.",
+    "install-windows-3.11 has reward and verifier output but lacks phase timestamps in result.json."
+  ]
+}

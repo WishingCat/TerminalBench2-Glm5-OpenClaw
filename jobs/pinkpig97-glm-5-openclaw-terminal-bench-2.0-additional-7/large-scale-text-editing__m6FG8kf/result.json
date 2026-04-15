@@ -1,0 +1,107 @@
+{
+    "id": "e5ac71b7-6ec5-4110-b42f-6d3de841cbf7",
+    "task_name": "large-scale-text-editing",
+    "trial_name": "large-scale-text-editing__m6FG8kf",
+    "trial_uri": "file:///Users/jameszhu/Projects/terminal-bench/jobs/tb2-openclaw-sf-glm5-large-scale-text-editing-20260414-124108/large-scale-text-editing__m6FG8kf",
+    "task_id": {
+        "path": "/Users/jameszhu/Projects/terminal-bench/repos/terminal-bench-2/large-scale-text-editing"
+    },
+    "source": "terminal-bench-2",
+    "task_checksum": "59ee801fdf46238b3dd6e72c7be695d55ebebb75596b0e328277f9ba76fcba39",
+    "config": {
+        "task": {
+            "path": "/Users/jameszhu/Projects/terminal-bench/repos/terminal-bench-2/large-scale-text-editing",
+            "git_url": null,
+            "git_commit_id": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench-2"
+        },
+        "trial_name": "large-scale-text-editing__m6FG8kf",
+        "trials_dir": "/Users/jameszhu/Projects/terminal-bench/jobs/tb2-openclaw-sf-glm5-large-scale-text-editing-20260414-124108",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": 10.0,
+        "environment_build_timeout_multiplier": 2.0,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "siliconflow/Pro/zai-org/GLM-5",
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "context_window": 200000,
+                "max_tokens": 8192,
+                "temperature": 0,
+                "model_params": {
+                    "enable_thinking": false,
+                    "temperature": 0.0,
+                    "maxTokens": 8192
+                },
+                "thinking": "off"
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "a145444c-9d3f-49db-817f-633199df2679"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "unknown",
+        "model_info": {
+            "name": "Pro/zai-org/GLM-5",
+            "provider": "siliconflow"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 1994,
+        "n_cache_tokens": 33728,
+        "n_output_tokens": 1552,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-14T04:41:11.210990Z",
+    "finished_at": "2026-04-14T04:50:32.662357Z",
+    "environment_setup": {
+        "started_at": "2026-04-14T04:41:11.212389Z",
+        "finished_at": "2026-04-14T04:41:12.050472Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-14T04:41:12.050564Z",
+        "finished_at": "2026-04-14T04:45:57.288347Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-14T04:45:57.288550Z",
+        "finished_at": "2026-04-14T04:49:11.755684Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-14T04:49:11.822046Z",
+        "finished_at": "2026-04-14T04:50:21.235078Z"
+    }
+}
