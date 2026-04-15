@@ -15,3 +15,4 @@
 # Keep gitignore and README
 !.gitignore
 !README.md
+!CLAUDE.md

@@ -4876,3 +4876,29 @@ Trial schemelike-metacircular-eval__HWE5mb5 failed: Agent setup timed out after 
 Not retrying trial because the maximum number of retries has been reached
 Trial qemu-startup__6PKRjx9 cancelled
 Trial build-pov-ray__bG3eKCY cancelled
+Trial git-multibranch__5VwPqwh failed: Agent setup failed with exit code 1. See logs in /Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/git-multibranch__5VwPqwh/agent/setup
+Not retrying trial because the maximum number of retries has been reached
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Trial gcode-to-text__SXonj4p failed: Agent setup failed with exit code 1. See logs in /Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/jobs/z-ai-glm-5-openclaw-terminal-bench-2.0/gcode-to-text__SXonj4p/agent/setup
+Not retrying trial because the maximum number of retries has been reached
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Trial constraints-scheduling__FxeKQWz failed: Docker compose command failed for environment constraints-scheduling. Command: docker compose -p constraints-scheduling__fxekqwz --project-directory /Users/wishingcat/.cache/harbor/tasks/CrxDfvhBFmo3ahvG2RfDM3/constraints-scheduling/environment -f /Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/harbor-openclaw/src/harbor/environments/docker/docker-compose-base.yaml -f /Users/wishingcat/UniPat/TerminalBench2-Glm5-OpenClaw/harbor-openclaw/src/harbor/environments/docker/docker-compose-prebuilt.yaml up --detach --wait. Return code: 1. Stdout:  Image alexgshaw/constraints-scheduling:20251031 Pulling 
+ dacaa4c4b456 Pulling fs layer 0B
+ 20929a28fe1e Pulling fs layer 0B
+failed to copy: httpReadSeeker: failed open: failed to do request: Get "https://mirror.gcr.io/v2/alexgshaw/constraints-scheduling/blobs/sha256:dacaa4c4b4567b83fe1f6a497ad6d562a963eea3b0ce7e4419d97af5c213526b?ns=docker.io": EOF
+. Stderr: None. 
+Not retrying trial because the maximum number of retries has been reached

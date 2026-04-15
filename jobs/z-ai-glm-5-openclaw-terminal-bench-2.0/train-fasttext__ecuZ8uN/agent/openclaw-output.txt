@@ -1,0 +1,8 @@
+[tools] exec failed: exec preflight: complex interpreter invocation detected; refusing to run without script preflight validation. Use a direct `python <file>.py` or `node <file>.js` command. raw_params={"command":"cd /app && python3 train_fasttext.py","timeout":300}
+[agent/embedded] [context-overflow-diag] sessionKey=agent:main:main provider=openai/z-ai/glm-5 source=assistantError messages=70 sessionFile=/logs/agent/openclaw-sessions/bb49ab58-2753-42af-951a-63a2f6b24a75.jsonl diagId=ovf-mnztg6sc-tRmoXw compactionAttempts=0 observedTokens=unknown error=Context overflow: estimated context size exceeds safe threshold during tool loop.
+[agent/embedded] context overflow detected (attempt 1/3); attempting auto-compaction for openai/z-ai/glm-5
+[agent/embedded] auto-compaction succeeded for openai/z-ai/glm-5; retrying prompt
+[agent/embedded] [context-overflow-diag] sessionKey=agent:main:main provider=openai/z-ai/glm-5 source=assistantError messages=39 sessionFile=/logs/agent/openclaw-sessions/bb49ab58-2753-42af-951a-63a2f6b24a75.jsonl diagId=ovf-mnzu97bx-Pq9QWQ compactionAttempts=1 observedTokens=unknown error=Context overflow: estimated context size exceeds safe threshold during tool loop.
+[agent/embedded] context overflow detected (attempt 2/3); attempting auto-compaction for openai/z-ai/glm-5
+[agent/embedded] auto-compaction succeeded for openai/z-ai/glm-5; retrying prompt
+[tools] exec failed: exec preflight: complex interpreter invocation detected; refusing to run without script preflight validation. Use a direct `python <file>.py` or `node <file>.js` command. raw_params={"command":"cd /app && python train_fasttext.py","timeout":1200}

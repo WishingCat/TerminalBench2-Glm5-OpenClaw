@@ -1,0 +1,1105 @@
+{
+  "schema_version": "ATIF-v1.6",
+  "session_id": "6abda3b1-cc55-43f2-bcb3-45af5236274f",
+  "agent": {
+    "name": "openclaw",
+    "version": "unknown",
+    "model_name": "openai/z-ai/glm-5",
+    "extra": {
+      "openclaw_session_id": "6abda3b1-cc55-43f2-bcb3-45af5236274f"
+    }
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "timestamp": "2026-04-15T15:01:53.543000Z",
+      "source": "user",
+      "message": "Compile SQLite in /app/sqlite with gcov instrumentation and make it available in the PATH.\nThe SQLite source snapshot is pre-vendored at /app/vendor/sqlite-fossil-release.tar.gz; use it instead of fetching sources over the network.",
+      "extra": {
+        "openclaw_role": "user",
+        "stop_reason": null,
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 2,
+      "timestamp": "2026-04-15T15:01:53.548000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "I'll compile SQLite with gcov instrumentation from the vendored source. Let me start by extracting and examining the build structure.",
+      "reasoning_content": "The user wants me to:\n1. Compile SQLite from a pre-vendored source tarball at /app/vendor/sqlite-fossil-release.tar.gz\n2. Compile it with gcov instrumentation (for code coverage)\n3. Make it available in PATH\n\nLet me start by extracting the tarball and looking at what's inside, then compile with gcov flags.\n\ngcov instrumentation typically requires:\n- `-fprofile-arcs` - for code coverage\n- `-ftest-coverage` - for code coverage\n- Or combined as `--coverage`\n\nLet me first check the tarball and extract it.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-ef340d9818c64644895985f71950400b",
+          "function_name": "exec",
+          "arguments": {
+            "command": "mkdir -p /app/sqlite && cd /app/sqlite && tar -xzf /app/vendor/sqlite-fossil-release.tar.gz && ls -la"
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 18720,
+        "completion_tokens": 313,
+        "cached_tokens": 142,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 19175
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 3,
+      "timestamp": "2026-04-15T15:02:06.331000Z",
+      "source": "agent",
+      "message": "total 12\ndrwxr-xr-x  3 root   root 4096 Apr 15 15:02 .\ndrwxr-xr-x  1 root   root 4096 Apr 15 15:02 ..\ndrwxr-xr-x 13 nobody root 4096 Jul 30  2025 sqlite",
+      "observation": {
+        "results": [
+          {
+            "content": "total 12\ndrwxr-xr-x  3 root   root 4096 Apr 15 15:02 .\ndrwxr-xr-x  1 root   root 4096 Apr 15 15:02 ..\ndrwxr-xr-x 13 nobody root 4096 Jul 30  2025 sqlite"
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-ef340d9818c64644895985f71950400b",
+        "exec_exit_code": 0,
+        "exec_status": "completed",
+        "exec_duration_ms": 507
+      }
+    },
+    {
+      "step_id": 4,
+      "timestamp": "2026-04-15T15:02:06.334000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "",
+      "reasoning_content": "The tarball extracted into a subdirectory `sqlite`. Let me see what's inside.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-682836dec9a24d90bf23c8c9ee0628c1",
+          "function_name": "exec",
+          "arguments": {
+            "command": "ls -la /app/sqlite/sqlite/"
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 146,
+        "completion_tokens": 56,
+        "cached_tokens": 18860,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 19062
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 5,
+      "timestamp": "2026-04-15T15:02:12.941000Z",
+      "source": "agent",
+      "message": "total 520\ndrwxr-xr-x 13 nobody root   4096 Jul 30  2025 .\ndrwxr-xr-x  3 root   root   4096 Apr 15 15:02 ..\ndrwxr-xr-x  2 nobody root   4096 Jul 30  2025 .fossil-settings\n-rw-r--r--  1 nobody root   3864 Jul 30  2025 LICENSE.md\n-rw-r--r--  1 nobody root  10767 Jul 30  2025 Makefile.in\n-rw-r--r--  1 nobody root   2016 Jul 30  2025 Makefile.linux-generic\n-rw-r--r--  1 nobody root  89525 Jul 30  2025 Makefile.msc\n-rw-r--r--  1 nobody root  21506 Jul 30  2025 README.md\n-rw-r--r--  1 nobody root      7 Jul 30  2025 VERSION\ndrwxr-xr-x  2 nobody root   4096 Jul 30  2025 art\n-rw-r--r--  1 nobody root   2399 Jul 30  2025 auto.def\ndrwxr-xr-x  3 nobody root   4096 Jul 30  2025 autoconf\ndrwxr-xr-x  3 nobody root   4096 Jul 30  2025 autosetup\n-rwxr-xr-x  1 nobody root    146 Jul 30  2025 configure\ndrwxr-xr-x  2 nobody root   4096 Jul 30  2025 contrib\ndrwxr-xr-x  2 nobody root   4096 Jul 30  2025 doc\ndrwxr-xr-x 16 nobody root   4096 Jul 30  2025 ext\n-rw-r--r--  1 nobody root   1562 Jul 30  2025 magic.txt\n-rw-r--r--  1 nobody root  82843 Jul 30  2025 main.mk\n-rw-r--r--  1 nobody root 184489 Jul 30  2025 manifest\n-rw-r--r--  1 nobody root     65 Jul 30  2025 manifest.uuid\ndrwxr-xr-x  2 nobody root   4096 Jul 30  2025 mptest\n-rw-r--r--  1 nobody root    258 Jul 30  2025 sqlite.pc.in\n-rw-r--r--  1 nobody root   4340 Jul 30  2025 sqlite3.1\n-rw-r--r--  1 nobody root    339 Jul 30  2025 sqlite3.pc.in\ndrwxr-xr-x  2 nobody root   4096 Jul 30  2025 src\ndrwxr-xr-x  3 nobody root  36864 Jul 30  2025 test\ndrwxr-xr-x  3 nobody root   4096 Jul 30  2025 tool",
+      "observation": {
+        "results": [
+          {
+            "content": "total 520\ndrwxr-xr-x 13 nobody root   4096 Jul 30  2025 .\ndrwxr-xr-x  3 root   root   4096 Apr 15 15:02 ..\ndrwxr-xr-x  2 nobody root   4096 Jul 30  2025 .fossil-settings\n-rw-r--r--  1 nobody root   3864 Jul 30  2025 LICENSE.md\n-rw-r--r--  1 nobody root  10767 Jul 30  2025 Makefile.in\n-rw-r--r--  1 nobody root   2016 Jul 30  2025 Makefile.linux-generic\n-rw-r--r--  1 nobody root  89525 Jul 30  2025 Makefile.msc\n-rw-r--r--  1 nobody root  21506 Jul 30  2025 README.md\n-rw-r--r--  1 nobody root      7 Jul 30  2025 VERSION\ndrwxr-xr-x  2 nobody root   4096 Jul 30  2025 art\n-rw-r--r--  1 nobody root   2399 Jul 30  2025 auto.def\ndrwxr-xr-x  3 nobody root   4096 Jul 30  2025 autoconf\ndrwxr-xr-x  3 nobody root   4096 Jul 30  2025 autosetup\n-rwxr-xr-x  1 nobody root    146 Jul 30  2025 configure\ndrwxr-xr-x  2 nobody root   4096 Jul 30  2025 contrib\ndrwxr-xr-x  2 nobody root   4096 Jul 30  2025 doc\ndrwxr-xr-x 16 nobody root   4096 Jul 30  2025 ext\n-rw-r--r--  1 nobody root   1562 Jul 30  2025 magic.txt\n-rw-r--r--  1 nobody root  82843 Jul 30  2025 main.mk\n-rw-r--r--  1 nobody root 184489 Jul 30  2025 manifest\n-rw-r--r--  1 nobody root     65 Jul 30  2025 manifest.uuid\ndrwxr-xr-x  2 nobody root   4096 Jul 30  2025 mptest\n-rw-r--r--  1 nobody root    258 Jul 30  2025 sqlite.pc.in\n-rw-r--r--  1 nobody root   4340 Jul 30  2025 sqlite3.1\n-rw-r--r--  1 nobody root    339 Jul 30  2025 sqlite3.pc.in\ndrwxr-xr-x  2 nobody root   4096 Jul 30  2025 src\ndrwxr-xr-x  3 nobody root  36864 Jul 30  2025 test\ndrwxr-xr-x  3 nobody root   4096 Jul 30  2025 tool"
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-682836dec9a24d90bf23c8c9ee0628c1",
+        "exec_exit_code": 0,
+        "exec_status": "completed",
+        "exec_duration_ms": 37
+      }
+    },
+    {
+      "step_id": 6,
+      "timestamp": "2026-04-15T15:02:12.947000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "",
+      "reasoning_content": "There's a `configure` script and `Makefile.in`. Let me check the configure options. For gcov instrumentation, I need to add `-fprofile-arcs -ftest-coverage` flags.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-20c6ef9af5cb4f218b47e9cedfc52fda",
+          "function_name": "exec",
+          "arguments": {
+            "command": "cd /app/sqlite/sqlite && ./configure --help 2>&1 | head -100"
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 19695,
+        "completion_tokens": 114,
+        "cached_tokens": 51,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 19860
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 7,
+      "timestamp": "2026-04-15T15:02:23.193000Z",
+      "source": "agent",
+      "message": "No installed jimsh or tclsh, building local bootstrap jimsh0\nNo working C compiler found. Tried cc and gcc.",
+      "observation": {
+        "results": [
+          {
+            "content": "No installed jimsh or tclsh, building local bootstrap jimsh0\nNo working C compiler found. Tried cc and gcc."
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-20c6ef9af5cb4f218b47e9cedfc52fda",
+        "exec_exit_code": 0,
+        "exec_status": "completed",
+        "exec_duration_ms": 96
+      }
+    },
+    {
+      "step_id": 8,
+      "timestamp": "2026-04-15T15:02:23.197000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "",
+      "reasoning_content": "No C compiler installed. I need to check what's available and install gcc.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-505e95677a2b435fb273a934df9f5f7e",
+          "function_name": "exec",
+          "arguments": {
+            "command": "which gcc cc clang 2>/dev/null || apt-get update && apt-get install -y gcc make"
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 62,
+        "completion_tokens": 63,
+        "cached_tokens": 19744,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 19869
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 9,
+      "timestamp": "2026-04-15T15:02:39.468000Z",
+      "source": "agent",
+      "message": "Command still running (session warm-sable, pid 3200). Use process (list/poll/log/write/kill/clear/remove) for follow-up.",
+      "observation": {
+        "results": [
+          {
+            "content": "Command still running (session warm-sable, pid 3200). Use process (list/poll/log/write/kill/clear/remove) for follow-up."
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-505e95677a2b435fb273a934df9f5f7e",
+        "exec_exit_code": null,
+        "exec_status": "running",
+        "exec_duration_ms": null
+      }
+    },
+    {
+      "step_id": 10,
+      "timestamp": "2026-04-15T15:02:39.474000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "",
+      "reasoning_content": "Let me check the process status.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-88086b4fa0fd493ebac00015cc3aa235",
+          "function_name": "process",
+          "arguments": {
+            "sessionId": "warm-sable",
+            "action": "poll",
+            "timeout": 60000
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 68,
+        "completion_tokens": 40,
+        "cached_tokens": 19804,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 19912
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 11,
+      "timestamp": "2026-04-15T15:03:51.718000Z",
+      "source": "agent",
+      "message": "Ign:1 http://archive.ubuntu.com/ubuntu noble InRelease\nIgn:2 http://security.ubuntu.com/ubuntu noble-security InRelease\n\nProcess still running.",
+      "observation": {
+        "results": [
+          {
+            "content": "Ign:1 http://archive.ubuntu.com/ubuntu noble InRelease\nIgn:2 http://security.ubuntu.com/ubuntu noble-security InRelease\n\nProcess still running."
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-88086b4fa0fd493ebac00015cc3aa235",
+        "exec_exit_code": null,
+        "exec_status": "running",
+        "exec_duration_ms": null
+      }
+    },
+    {
+      "step_id": 12,
+      "timestamp": "2026-04-15T15:03:51.723000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "",
+      "reasoning_content": "Still running. Let me wait more.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-70e7b2c6f48f4235806c67f121d8e002",
+          "function_name": "process",
+          "arguments": {
+            "action": "poll",
+            "sessionId": "warm-sable",
+            "timeout": 120000
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 19524,
+        "completion_tokens": 42,
+        "cached_tokens": 410,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 19976
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 13,
+      "timestamp": "2026-04-15T15:06:02.224000Z",
+      "source": "agent",
+      "message": "Ign:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease\nIgn:2 http://security.ubuntu.com/ubuntu noble-security InRelease\nIgn:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease\nIgn:2 http://security.ubuntu.com/ubuntu noble-security InRelease\n\nProcess still running.",
+      "observation": {
+        "results": [
+          {
+            "content": "Ign:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease\nIgn:2 http://security.ubuntu.com/ubuntu noble-security InRelease\nIgn:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease\nIgn:2 http://security.ubuntu.com/ubuntu noble-security InRelease\n\nProcess still running."
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-70e7b2c6f48f4235806c67f121d8e002",
+        "exec_exit_code": null,
+        "exec_status": "running",
+        "exec_duration_ms": null
+      }
+    },
+    {
+      "step_id": 14,
+      "timestamp": "2026-04-15T15:06:02.346000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "",
+      "reasoning_content": "The apt-get update is running but seems to be having network issues (it's ignoring repos). Let me wait more.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-e2b7448655eb49dd8fb18a29d15e1fac",
+          "function_name": "process",
+          "arguments": {
+            "action": "poll",
+            "sessionId": "warm-sable",
+            "timeout": 120000
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 19890,
+        "completion_tokens": 74,
+        "cached_tokens": 139,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 20103
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 15,
+      "timestamp": "2026-04-15T15:08:10.035000Z",
+      "source": "agent",
+      "message": "Ign:1 http://archive.ubuntu.com/ubuntu noble InRelease\nErr:2 http://security.ubuntu.com/ubuntu noble-security InRelease\n  Connection failed [IP: 198.18.0.17 80]\nIgn:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease\n\nProcess still running.",
+      "observation": {
+        "results": [
+          {
+            "content": "Ign:1 http://archive.ubuntu.com/ubuntu noble InRelease\nErr:2 http://security.ubuntu.com/ubuntu noble-security InRelease\n  Connection failed [IP: 198.18.0.17 80]\nIgn:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease\n\nProcess still running."
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-e2b7448655eb49dd8fb18a29d15e1fac",
+        "exec_exit_code": null,
+        "exec_status": "running",
+        "exec_duration_ms": null
+      }
+    },
+    {
+      "step_id": 16,
+      "timestamp": "2026-04-15T15:08:10.042000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "",
+      "reasoning_content": "Network issues - let me wait a bit more.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-edac3f31ced9410c8545b1753168220d",
+          "function_name": "process",
+          "arguments": {
+            "action": "poll",
+            "sessionId": "warm-sable",
+            "timeout": 120000
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 19985,
+        "completion_tokens": 46,
+        "cached_tokens": 139,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 20170
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 17,
+      "timestamp": "2026-04-15T15:10:20.250000Z",
+      "source": "agent",
+      "message": "Ign:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease\nIgn:1 http://archive.ubuntu.com/ubuntu noble InRelease\n\nProcess still running.",
+      "observation": {
+        "results": [
+          {
+            "content": "Ign:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease\nIgn:1 http://archive.ubuntu.com/ubuntu noble InRelease\n\nProcess still running."
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-edac3f31ced9410c8545b1753168220d",
+        "exec_exit_code": null,
+        "exec_status": "running",
+        "exec_duration_ms": null
+      }
+    },
+    {
+      "step_id": 18,
+      "timestamp": "2026-04-15T15:10:20.262000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "",
+      "reasoning_content": "The apt update seems to be having network issues. Let me wait a bit more.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-4f0678c6ef484003941f070ce161c703",
+          "function_name": "process",
+          "arguments": {
+            "action": "poll",
+            "sessionId": "warm-sable",
+            "timeout": 120000
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 20048,
+        "completion_tokens": 60,
+        "cached_tokens": 139,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 20247
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 19,
+      "timestamp": "2026-04-15T15:12:26.652000Z",
+      "source": "agent",
+      "message": "Ign:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease\nIgn:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease\n\nProcess still running.",
+      "observation": {
+        "results": [
+          {
+            "content": "Ign:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease\nIgn:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease\n\nProcess still running."
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-4f0678c6ef484003941f070ce161c703",
+        "exec_exit_code": null,
+        "exec_status": "running",
+        "exec_duration_ms": null
+      }
+    },
+    {
+      "step_id": 20,
+      "timestamp": "2026-04-15T15:12:26.664000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "",
+      "reasoning_content": "It seems to be stuck or taking very long. Let me wait a bit more and check.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-534a199e91f74666bee2013aa9b35112",
+          "function_name": "process",
+          "arguments": {
+            "action": "poll",
+            "sessionId": "warm-sable",
+            "timeout": 120000
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 7825,
+        "completion_tokens": 64,
+        "cached_tokens": 12427,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 20316
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 21,
+      "timestamp": "2026-04-15T15:13:26.387000Z",
+      "source": "agent",
+      "message": "jbig0 libjpeg-turbo8 libjpeg8 liblerc4 liblsan0\n  libmpc3 libmpfr6 libpng16-16t64 libquadmath0 libsframe1 libsharpyuv0\n  libtiff6 libtsan2 libubsan1 libwebp7 libx11-6 libx11-data libxau6 libxcb1\n  libxdmcp6 libxpm4 linux-libc-dev make manpages manpages-dev rpcsvc-proto\nThe following packages will be upgraded:\n  gcc-14-base libc-bin libc6 libgcc-s1 libstdc++6\n5 upgraded, 69 newly installed, 0 to remove and 14 not upgraded.\nNeed to get 69.7 MB of archives.\nAfter this operation, 215 MB of additional disk space will be used.\nGet:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-14-base amd64 14.2.0-4ubuntu2~24.04.1 [51.0 kB]\nGet:2 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgcc-s1 amd64 14.2.0-4ubuntu2~24.04.1 [78.4 kB]\nGet:3 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libstdc++6 amd64 14.2.0-4ubuntu2~24.04.1 [792 kB]\nGet:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libc6 amd64 2.39-0ubuntu8.7 [3263 kB]\nGet:5 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libc-bin amd64 2.39-0ubuntu8.7 [682 kB]\nGet:6 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]\nGet:7 http://archive.ubuntu.com/ubuntu noble/main amd64 libjansson4 amd64 2.14-2build2 [32.8 kB]\nGet:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpng16-16t64 amd64 1.6.43-5ubuntu0.5 [188 kB]\nGet:9 http://archive.ubuntu.com/ubuntu noble/main amd64 libxau6 amd64 1:1.0.9-1build6 [7160 B]\nGet:10 http://archive.ubuntu.com/ubuntu noble/main amd64 libxdmcp6 amd64 1:1.1.3-0ubuntu6 [10.3 kB]\nGet:11 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb1 amd64 1.15-1ubuntu2 [47.7 kB]\nGet:12 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-data all 2:1.8.7-1build1 [115 kB]\nGet:13 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-6 amd64 2:1.8.7-1build1 [650 kB]\nGet:14 http://archive.ubuntu.com/ubuntu noble/main amd64 manpages all 6.7-2 [1384 kB]\nGet:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils-common amd64 2.42-4ubuntu2.10 [240 kB]\nGet:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsframe1 amd64 2.42-4ubuntu2.10 [15.7 kB]\nGet:17 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbinutils amd64 2.42-4ubuntu2.10 [577 kB]\nGet:18 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libctf-nobfd0 amd64 2.42-4ubuntu2.10 [98.0 kB]\nGet:19 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libctf0 amd64 2.42-4ubuntu2.10 [94.5 kB]\nGet:20 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgprofng0 amd64 2.42-4ubuntu2.10 [849 kB]\nGet:21 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils-x86-64-linux-gnu amd64 2.42-4ubuntu2.10 [2463 kB]\nGet:22 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils amd64 2.42-4ubuntu2.10 [18.2 kB]\nGet:23 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13-base amd64 13.3.0-6ubuntu2~24.04.1 [51.6 kB]\nGet:24 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libisl23 amd64 0.26-3build1.1 [680 kB]\nGet:25 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libmpfr6 amd64 4.2.1-1build1.1 [353 kB]\nGet:26 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libmpc3 amd64 1.3.1-1build1.1 [54.6 kB]\nGet:27 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 cpp-13-x86-64-linux-gnu amd64 13.3.0-6ubuntu2~24.04.1 [10.7 MB]\nGet:28 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 cpp-13 amd64 13.3.0-6ubuntu2~24.04.1 [1042 B]\nGet:29 http://archive.ubuntu.com/ubuntu noble/main amd64 cpp-x86-64-linux-gnu amd64 4:13.2.0-7ubuntu1 [5326 B]\nGet:30 http://archive.ubuntu.com/ubuntu noble/main amd64 cpp amd64 4:13.2.0-7ubuntu1 [22.4 kB]\nGet:31 http://archive.ubuntu.com/ubuntu noble/main amd64 fonts-dejavu-mono all 2.37-8 [502 kB]\nGet:32 http://archive.ubuntu.com/ubuntu noble/main amd64 fonts-dejavu-core all 2.37-8 [835 kB]\nGet:33 http://archive.ubuntu.com/ubuntu noble/main amd64 fontconfig-config amd64 2.15.0-1.1ubuntu2 [37.3 kB]\nGet:34 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcc1-0 amd64 14.2.0-4ubuntu2~24.04.1 [48.0 kB]\nGet:35 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgomp1 amd64 14.2.0-4ubuntu2~24.04.1 [148 kB]\nGet:36 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libitm1 amd64 14.2.0-4ubuntu2~24.04.1 [29.7 kB]\nGet:37 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libatomic1 amd64 14.2.0-4ubuntu2~24.04.1 [10.5 kB]\nGet:38 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libasan8 amd64 14.2.0-4ubuntu2~24.04.1 [3027 kB]\nGet:39 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 liblsan0 amd64 14.2.0-4ubuntu2~24.04.1 [1322 kB]\nGet:40 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libtsan2 amd64 14.2.0-4ubuntu2~24.04.1 [2772 kB]\nGet:41 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libubsan1 amd64 14.2.0-4ubuntu2~24.04.1 [1184 kB]\nGet:42 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libhwasan0 amd64 14.2.0-4ubuntu2~24.04.1 [1641 kB]\nGet:43 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libquadmath0 amd64 14.2.0-4ubuntu2~24.04.1 [153 kB]\nGet:44 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgcc-13-dev amd64 13.3.0-6ubuntu2~24.04.1 [2681 kB]\nGet:45 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13-x86-64-linux-gnu amd64 13.3.0-6ubuntu2~24.04.1 [21.1 MB]\nGet:46 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13 amd64 13.3.0-6ubuntu2~24.04.1 [494 kB]\nGet:47 http://archive.ubuntu.com/ubuntu noble/main amd64 gcc-x86-64-linux-gnu amd64 4:13.2.0-7ubuntu1 [1212 B]\nGet:48 http://archive.ubuntu.com/ubuntu noble/main amd64 gcc amd64 4:13.2.0-7ubuntu1 [5018 B]\nGet:49 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libaom3 amd64 3.8.2-2ubuntu0.1 [1941 kB]\nGet:50 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libc-dev-bin amd64 2.39-0ubuntu8.7 [20.4 kB]\nGet:51 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libfreetype6 amd64 2.13.2+dfsg-1ubuntu0.1 [402 kB]\nGet:52 http://archive.ubuntu.com/ubuntu noble/main amd64 libfontconfig1 amd64 2.15.0-1.1ubuntu2 [139 kB]\nGet:53 http://archive.ubuntu.com/ubuntu noble/main amd64 libsharpyuv0 amd64 1.3.2-0.4build3 [15.8 kB]\nGet:54 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-aomdec amd64 1.17.6-1ubuntu4.2 [10.6 kB]\nGet:55 http://archive.ubuntu.com/ubuntu noble/main amd64 libde265-0 amd64 1.0.15-1build3 [166 kB]\nGet:56 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-libde265 amd64 1.17.6-1ubuntu4.2 [8174 B]\nGet:57 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif1 amd64 1.17.6-1ubuntu4.2 [276 kB]\nGet:58 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-turbo8 amd64 2.1.5-2ubuntu2 [150 kB]\nGet:59 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg8 amd64 8c-2ubuntu11 [2148 B]\nGet:60 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdeflate0 amd64 1.19-1build1.1 [43.9 kB]\nGet:61 http://archive.ubuntu.com/ubuntu noble/main amd64 libjbig0 amd64 2.1-6.1ubuntu2 [29.7 kB]\nGet:62 http://archive.ubuntu.com/ubuntu noble/main amd64 liblerc4 amd64 4.0.0+ds-4ubuntu2 [179 kB]\nGet:63 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebp7 amd64 1.3.2-0.4build3 [230 kB]\nGet:64 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libtiff6 amd64 4.5.1+git230720-4ubuntu2.5 [200 kB]\nGet:65 http://archive.ubuntu.com/ubuntu noble/main amd64 libxpm4 amd64 1:3.5.17-1build2 [36.5 kB]\nGet:66 http://archive.ubuntu.com/ubuntu noble/main amd64 libgd3 amd64 2.3.3-9ubuntu5 [128 kB]\nGet:67 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libc-devtools amd64 2.39-0ubuntu8.7 [29.3 kB]\nGet:68 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-libc-dev amd64 6.8.0-110.110 [1587 kB]\nGet:69 http://archive.ubuntu.com/ubuntu noble/main amd64 libcrypt-dev amd64 1:4.4.36-4build1 [112 kB]\nGet:70 http://archive.ubuntu.com/ubuntu noble/main amd64 rpcsvc-proto amd64 1.4.2-0ubuntu7 [67.4 kB]\nGet:71 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libc6-dev amd64 2.39-0ubuntu8.7 [2124 kB]\nGet:72 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-aomenc amd64 1.17.6-1ubuntu4.2 [14.7 kB]\nGet:73 http://archive.ubuntu.com/ubuntu noble/main amd64 make amd64 4.3-4.1build2 [180 kB]\nGet:74 http://archive.ubuntu.com/ubuntu noble/main amd64 manpages-dev all 6.7-2 [2013 kB]\nFetched 69.7 MB in 8s (8798 kB/s)\n(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 8228 files and directories currently installed.)\r\nPreparing to unpack .../gcc-14-base_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking gcc-14-base:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...\r\nSetting up gcc-14-base:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\n(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 8228 files and directories currently installed.)\r\nPreparing to unpack .../libgcc-s1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libgcc-s1:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...\r\nSetting up libgcc-s1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\n(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 8228 files and directories currently installed.)\r\nPreparing to unpack .../libstdc++6_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libstdc++6:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...\r\nSetting up libstdc++6:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\n(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 8228 files and directories currently installed.)\r\nPreparing to unpack .../libc6_2.39-0ubuntu8.7_amd64.deb ...\r\ndebconf: unable to initialize frontend: Dialog\r\ndebconf: (TERM is not set, so the dialog frontend is not usable.)\r\ndebconf: falling back to frontend: Readline\r\ndebconf: unable to initialize frontend: Readline\r\ndebconf: (This frontend requires a controlling tty.)\r\ndebconf: falling back to frontend: Teletype\r\nUnpacking libc6:amd64 (2.39-0ubuntu8.7) over (2.39-0ubuntu8.6) ...\r\nSetting up libc6:amd64 (2.39-0ubuntu8.7) ...\r\ndebconf: unable to initialize frontend: Dialog\r\ndebconf: (TERM is not set, so the dialog frontend is not usable.)\r\ndebconf: falling back to frontend: Readline\r\ndebconf: unable to initialize frontend: Readline\r\ndebconf: (This frontend requires a controlling tty.)\r\ndebconf: falling back to frontend: Teletype\r\n(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 8228 files and directories currently installed.)\r\nPreparing to unpack .../libc-bin_2.39-0ubuntu8.7_amd64.deb ...\r\nUnpacking libc-bin (2.39-0ubuntu8.7) over (2.39-0ubuntu8.6) ...\r\nSetting up libc-bin (2.39-0ubuntu8.7) ...\r\nSelecting previously unselected package libbsd0:amd64.\r\n(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 8228 files and directories currently installed.)\r\nPreparing to unpack .../00-libbsd0_0.12.1-1build1.1_amd64.deb ...\r\nUnpacking libbsd0:amd64 (0.12.1-1build1.1) ...\r\nSelecting previously unselected package libjansson4:amd64.\r\nPreparing to unpack .../01-libjansson4_2.14-2build2_amd64.deb ...\r\nUnpacking libjansson4:amd64 (2.14-2build2) ...\r\nSelecting previously unselected package libpng16-16t64:amd64.\r\nPreparing to unpack .../02-libpng16-16t64_1.6.43-5ubuntu0.5_amd64.deb ...\r\nUnpacking libpng16-16t64:amd64 (1.6.43-5ubuntu0.5) ...\r\nSelecting previously unselected package libxau6:amd64.\r\nPreparing to unpack .../03-libxau6_1%3a1.0.9-1build6_amd64.deb ...\r\nUnpacking libxau6:amd64 (1:1.0.9-1build6) ...\r\nSelecting previously unselected package libxdmcp6:amd64.\r\nPreparing to unpack .../04-libxdmcp6_1%3a1.1.3-0ubuntu6_amd64.deb ...\r\nUnpacking libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...\r\nSelecting previously unselected package libxcb1:amd64.\r\nPreparing to unpack .../05-libxcb1_1.15-1ubuntu2_amd64.deb ...\r\nUnpacking libxcb1:amd64 (1.15-1ubuntu2) ...\r\nSelecting previously unselected package libx11-data.\r\nPreparing to unpack .../06-libx11-data_2%3a1.8.7-1build1_all.deb ...\r\nUnpacking libx11-data (2:1.8.7-1build1) ...\r\nSelecting previously unselected package libx11-6:amd64.\r\nPreparing to unpack .../07-libx11-6_2%3a1.8.7-1build1_amd64.deb ...\r\nUnpacking libx11-6:amd64 (2:1.8.7-1build1) ...\r\nSelecting previously unselected package manpages.\r\nPreparing to unpack .../08-manpages_6.7-2_all.deb ...\r\nUnpacking manpages (6.7-2) ...\r\nSelecting previously unselected package binutils-common:amd64.\r\nPreparing to unpack .../09-binutils-common_2.42-4ubuntu2.10_amd64.deb ...\r\nUnpacking binutils-common:amd64 (2.42-4ubuntu2.10) ...\r\nSelecting previously unselected package libsframe1:amd64.\r\nPreparing to unpack .../10-libsframe1_2.42-4ubuntu2.10_amd64.deb ...\r\nUnpacking libsframe1:amd64 (2.42-4ubuntu2.10) ...\r\nSelecting previously unselected package libbinutils:amd64.\r\nPreparing to unpack .../11-libbinutils_2.42-4ubuntu2.10_amd64.deb ...\r\nUnpacking libbinutils:amd64 (2.42-4ubuntu2.10) ...\r\nSelecting previously unselected package libctf-nobfd0:amd64.\r\nPreparing to unpack .../12-libctf-nobfd0_2.42-4ubuntu2.10_amd64.deb ...\r\nUnpacking libctf-nobfd0:amd64 (2.42-4ubuntu2.10) ...\r\nSelecting previously unselected package libctf0:amd64.\r\nPreparing to unpack .../13-libctf0_2.42-4ubuntu2.10_amd64.deb ...\r\nUnpacking libctf0:amd64 (2.42-4ubuntu2.10) ...\r\nSelecting previously unselected package libgprofng0:amd64.\r\nPreparing to unpack .../14-libgprofng0_2.42-4ubuntu2.10_amd64.deb ...\r\nUnpacking libgprofng0:amd64 (2.42-4ubuntu2.10) ...\r\nSelecting previously unselected package binutils-x86-64-linux-gnu.\r\nPreparing to unpack .../15-binutils-x86-64-linux-gnu_2.42-4ubuntu2.10_amd64.deb ...\r\nUnpacking binutils-x86-64-linux-gnu (2.42-4ubuntu2.10) ...\r\nSelecting previously unselected package binutils.\r\nPreparing to unpack .../16-binutils_2.42-4ubuntu2.10_amd64.deb ...\r\nUnpacking binutils (2.42-4ubuntu2.10) ...\r\nSelecting previously unselected package gcc-13-base:amd64.\r\nPreparing to unpack .../17-gcc-13-base_13.3.0-6ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking gcc-13-base:amd64 (13.3.0-6ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libisl23:amd64.\r\nPreparing to unpack .../18-libisl23_0.26-3build1.1_amd64.deb ...\r\nUnpacking libisl23:amd64 (0.26-3build1.1) ...\r\nSelecting previously unselected package libmpfr6:amd64.\r\nPreparing to unpack .../19-libmpfr6_4.2.1-1build1.1_amd64.deb ...\r\nUnpacking libmpfr6:amd64 (4.2.1-1build1.1) ...\r\nSelecting previously unselected package libmpc3:amd64.\r\nPreparing to unpack .../20-libmpc3_1.3.1-1build1.1_amd64.deb ...\r\nUnpacking libmpc3:amd64 (1.3.1-1build1.1) ...\r\nSelecting previously unselected package cpp-13-x86-64-linux-gnu.\r\nPreparing to unpack .../21-cpp-13-x86-64-linux-gnu_13.3.0-6ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking cpp-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...\r\nSelecting previously unselected package cpp-13.\r\nPreparing to unpack .../22-cpp-13_13.3.0-6ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking cpp-13 (13.3.0-6ubuntu2~24.04.1) ...\r\nSelecting previously unselected package cpp-x86-64-linux-gnu.\r\nPreparing to unpack .../23-cpp-x86-64-linux-gnu_4%3a13.2.0-7ubuntu1_amd64.deb ...\r\nUnpacking cpp-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...\r\nSelecting previously unselected package cpp.\r\nPreparing to unpack .../24-cpp_4%3a13.2.0-7ubuntu1_amd64.deb ...\r\nUnpacking cpp (4:13.2.0-7ubuntu1) ...\r\nSelecting previously unselected package fonts-dejavu-mono.\r\nPreparing to unpack .../25-fonts-dejavu-mono_2.37-8_all.deb ...\r\nUnpacking fonts-dejavu-mono (2.37-8) ...\r\nSelecting previously unselected package fonts-dejavu-core.\r\nPreparing to unpack .../26-fonts-dejavu-core_2.37-8_all.deb ...\r\nUnpacking fonts-dejavu-core (2.37-8) ...\r\nSelecting previously unselected package fontconfig-config.\r\nPreparing to unpack .../27-fontconfig-config_2.15.0-1.1ubuntu2_amd64.deb ...\r\nUnpacking fontconfig-config (2.15.0-1.1ubuntu2) ...\r\nSelecting previously unselected package libcc1-0:amd64.\r\nPreparing to unpack .../28-libcc1-0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libcc1-0:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libgomp1:amd64.\r\nPreparing to unpack .../29-libgomp1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libgomp1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libitm1:amd64.\r\nPreparing to unpack .../30-libitm1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libitm1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libatomic1:amd64.\r\nPreparing to unpack .../31-libatomic1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libatomic1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libasan8:amd64.\r\nPreparing to unpack .../32-libasan8_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libasan8:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package liblsan0:amd64.\r\nPreparing to unpack .../33-liblsan0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking liblsan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libtsan2:amd64.\r\nPreparing to unpack .../34-libtsan2_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libtsan2:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libubsan1:amd64.\r\nPreparing to unpack .../35-libubsan1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libubsan1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libhwasan0:amd64.\r\nPreparing to unpack .../36-libhwasan0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libhwasan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libquadmath0:amd64.\r\nPreparing to unpack .../37-libquadmath0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libquadmath0:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libgcc-13-dev:amd64.\r\nPreparing to unpack .../38-libgcc-13-dev_13.3.0-6ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libgcc-13-dev:amd64 (13.3.0-6ubuntu2~24.04.1) ...\r\nSelecting previously unselected package gcc-13-x86-64-linux-gnu.\r\nPreparing to unpack .../39-gcc-13-x86-64-linux-gnu_13.3.0-6ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking gcc-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...\r\nSelecting previously unselected package gcc-13.\r\nPreparing to unpack .../40-gcc-13_13.3.0-6ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking gcc-13 (13.3.0-6ubuntu2~24.04.1) ...\r\nSelecting previously unselected package gcc-x86-64-linux-gnu.\r\nPreparing to unpack .../41-gcc-x86-64-linux-gnu_4%3a13.2.0-7ubuntu1_amd64.deb ...\r\nUnpacking gcc-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...\r\nSelecting previously unselected package gcc.\r\nPreparing to unpack .../42-gcc_4%3a13.2.0-7ubuntu1_amd64.deb ...\r\nUnpacking gcc (4:13.2.0-7ubuntu1) ...\r\nSelecting previously unselected package libaom3:amd64.\r\nPreparing to unpack .../43-libaom3_3.8.2-2ubuntu0.1_amd64.deb ...\r\nUnpacking libaom3:amd64 (3.8.2-2ubuntu0.1) ...\r\nSelecting previously unselected package libc-dev-bin.\r\nPreparing to unpack .../44-libc-dev-bin_2.39-0ubuntu8.7_amd64.deb ...\r\nUnpacking libc-dev-bin (2.39-0ubuntu8.7) ...\r\nSelecting previously unselected package libfreetype6:amd64.\r\nPreparing to unpack .../45-libfreetype6_2.13.2+dfsg-1ubuntu0.1_amd64.deb ...\r\nUnpacking libfreetype6:amd64 (2.13.2+dfsg-1ubuntu0.1) ...\r\nSelecting previously unselected package libfontconfig1:amd64.\r\nPreparing to unpack .../46-libfontconfig1_2.15.0-1.1ubuntu2_amd64.deb ...\r\nUnpacking libfontconfig1:amd64 (2.15.0-1.1ubuntu2) ...\r\nSelecting previously unselected package libsharpyuv0:amd64.\r\nPreparing to unpack .../47-libsharpyuv0_1.3.2-0.4build3_amd64.deb ...\r\nUnpacking libsharpyuv0:amd64 (1.3.2-0.4build3) ...\r\nSelecting previously unselected package libheif-plugin-aomdec:amd64.\r\nPreparing to unpack .../48-libheif-plugin-aomdec_1.17.6-1ubuntu4.2_amd64.deb ...\r\nUnpacking libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...\r\nSelecting previously unselected package libde265-0:amd64.\r\nPreparing to unpack .../49-libde265-0_1.0.15-1build3_amd64.deb ...\r\nUnpacking libde265-0:amd64 (1.0.15-1build3) ...\r\nSelecting previously unselected package libheif-plugin-libde265:amd64.\r\nPreparing to unpack .../50-libheif-plugin-libde265_1.17.6-1ubuntu4.2_amd64.deb ...\r\nUnpacking libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...\r\nSelecting previously unselected package libheif1:amd64.\r\nPreparing to unpack .../51-libheif1_1.17.6-1ubuntu4.2_amd64.deb ...\r\nUnpacking libheif1:amd64 (1.17.6-1ubuntu4.2) ...\r\nSelecting previously unselected package libjpeg-turbo8:amd64.\r\nPreparing to unpack .../52-libjpeg-turbo8_2.1.5-2ubuntu2_amd64.deb ...\r\nUnpacking libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...\r\nSelecting previously unselected package libjpeg8:amd64.\r\nPreparing to unpack .../53-libjpeg8_8c-2ubuntu11_amd64.deb ...\r\nUnpacking libjpeg8:amd64 (8c-2ubuntu11) ...\r\nSelecting previously unselected package libdeflate0:amd64.\r\nPreparing to unpack .../54-libdeflate0_1.19-1build1.1_amd64.deb ...\r\nUnpacking libdeflate0:amd64 (1.19-1build1.1) ...\r\nSelecting previously unselected package libjbig0:amd64.\r\nPreparing to unpack .../55-libjbig0_2.1-6.1ubuntu2_amd64.deb ...\r\nUnpacking libjbig0:amd64 (2.1-6.1ubuntu2) ...\r\nSelecting previously unselected package liblerc4:amd64.\r\nPreparing to unpack .../56-liblerc4_4.0.0+ds-4ubuntu2_amd64.deb ...\r\nUnpacking liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...\r\nSelecting previously unselected package libwebp7:amd64.\r\nPreparing to unpack .../57-libwebp7_1.3.2-0.4build3_amd64.deb ...\r\nUnpacking libwebp7:amd64 (1.3.2-0.4build3) ...\r\nSelecting previously unselected package libtiff6:amd64.\r\nPreparing to unpack .../58-libtiff6_4.5.1+git230720-4ubuntu2.5_amd64.deb ...\r\nUnpacking libtiff6:amd64 (4.5.1+git230720-4ubuntu2.5) ...\r\nSelecting previously unselected package libxpm4:amd64.\r\nPreparing to unpack .../59-libxpm4_1%3a3.5.17-1build2_amd64.deb ...\r\nUnpacking libxpm4:amd64 (1:3.5.17-1build2) ...\r\nSelecting previously unselected package libgd3:amd64.\r\nPreparing to unpack .../60-libgd3_2.3.3-9ubuntu5_amd64.deb ...\r\nUnpacking libgd3:amd64 (2.3.3-9ubuntu5) ...\r\nSelecting previously unselected package libc-devtools.\r\nPreparing to unpack .../61-libc-devtools_2.39-0ubuntu8.7_amd64.deb ...\r\nUnpacking libc-devtools (2.39-0ubuntu8.7) ...\r\nSelecting previously unselected package linux-libc-dev:amd64.\r\nPreparing to unpack .../62-linux-libc-dev_6.8.0-110.110_amd64.deb ...\r\nUnpacking linux-libc-dev:amd64 (6.8.0-110.110) ...\r\nSelecting previously unselected package libcrypt-dev:amd64.\r\nPreparing to unpack .../63-libcrypt-dev_1%3a4.4.36-4build1_amd64.deb ...\r\nUnpacking libcrypt-dev:amd64 (1:4.4.36-4build1) ...\r\nSelecting previously unselected package rpcsvc-proto.\r\nPreparing to unpack .../64-rpcsvc-proto_1.4.2-0ubuntu7_amd64.deb ...\r\nUnpacking rpcsvc-proto (1.4.2-0ubuntu7) ...\r\nSelecting previously unselected package libc6-dev:amd64.\r\nPreparing to unpack .../65-libc6-dev_2.39-0ubuntu8.7_amd64.deb ...\r\nUnpacking libc6-dev:amd64 (2.39-0ubuntu8.7) ...\r\nSelecting previously unselected package libheif-plugin-aomenc:amd64.\r\nPreparing to unpack .../66-libheif-plugin-aomenc_1.17.6-1ubuntu4.2_amd64.deb ...\r\nUnpacking libheif-plugin-aomenc:amd64 (1.17.6-1ubuntu4.2) ...\r\nSelecting previously unselected package make.\r\nPreparing to unpack .../67-make_4.3-4.1build2_amd64.deb ...\r\nUnpacking make (4.3-4.1build2) ...\r\nSelecting previously unselected package manpages-dev.\r\nPreparing to unpack .../68-manpages-dev_6.7-2_all.deb ...\r\nUnpacking manpages-dev (6.7-2) ...\r\nSetting up libsharpyuv0:amd64 (1.3.2-0.4build3) ...\r\nSetting up libaom3:amd64 (3.8.2-2ubuntu0.1) ...\r\nSetting up libxau6:amd64 (1:1.0.9-1build6) ...\r\nSetting up liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...\r\nSetting up manpages (6.7-2) ...\r\nSetting up binutils-common:amd64 (2.42-4ubuntu2.10) ...\r\nSetting up libdeflate0:amd64 (1.19-1build1.1) ...\r\nSetting up linux-libc-dev:amd64 (6.8.0-110.110) ...\r\nSetting up libctf-nobfd0:amd64 (2.42-4ubuntu2.10) ...\r\nSetting up libgomp1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up libjbig0:amd64 (2.1-6.1ubuntu2) ...\r\nSetting up libsframe1:amd64 (2.42-4ubuntu2.10) ...\r\nSetting up libjansson4:amd64 (2.14-2build2) ...\r\nSetting up rpcsvc-proto (1.4.2-0ubuntu7) ...\r\nSetting up gcc-13-base:amd64 (13.3.0-6ubuntu2~24.04.1) ...\r\nSetting up libx11-data (2:1.8.7-1build1) ...\r\nSetting up make (4.3-4.1build2) ...\r\nSetting up libmpfr6:amd64 (4.2.1-1build1.1) ...\r\nSetting up libquadmath0:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up fonts-dejavu-mono (2.37-8) ...\r\nSetting up libpng16-16t64:amd64 (1.6.43-5ubuntu0.5) ...\r\nSetting up libmpc3:amd64 (1.3.1-1build1.1) ...\r\nSetting up libatomic1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up fonts-dejavu-core (2.37-8) ...\r\nSetting up libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...\r\nSetting up libwebp7:amd64 (1.3.2-0.4build3) ...\r\nSetting up libubsan1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up libhwasan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up libcrypt-dev:amd64 (1:4.4.36-4build1) ...\r\nSetting up libasan8:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up libtsan2:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up libbinutils:amd64 (2.42-4ubuntu2.10) ...\r\nSetting up libisl23:amd64 (0.26-3build1.1) ...\r\nSetting up libde265-0:amd64 (1.0.15-1build3) ...\r\nSetting up libc-dev-bin (2.39-0ubuntu8.7) ...\r\nSetting up libbsd0:amd64 (0.12.1-1build1.1) ...\r\nSetting up libcc1-0:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up liblsan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up libitm1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up libctf0:amd64 (2.42-4ubuntu2.10) ...\r\nSetting up libjpeg8:amd64 (8c-2ubuntu11) ...\r\nSetting up manpages-dev (6.7-2) ...\r\nSetting up libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...\r\nSetting up libxcb1:amd64 (1.15-1ubuntu2) ...\r\nSetting up cpp-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...\r\nSetting up fontconfig-config (2.15.0-1.1ubuntu2) ...\r\nSetting up libgprofng0:amd64 (2.42-4ubuntu2.10) ...\r\nSetting up libfreetype6:amd64 (2.13.2+dfsg-1ubuntu0.1) ...\r\nSetting up libgcc-13-dev:amd64 (13.3.0-6ubuntu2~24.04.1) ...\r\nSetting up libtiff6:amd64 (4.5.1+git230720-4ubuntu2.5) ...\r\nSetting up libc6-dev:amd64 (2.39-0ubuntu8.7) ...\r\nSetting up libx11-6:amd64 (2:1.8.7-1build1) ...\r\nSetting up libfontconfig1:amd64 (2.15.0-1.1ubuntu2) ...\r\nSetting up binutils-x86-64-linux-gnu (2.42-4ubuntu2.10) ...\r\nSetting up cpp-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...\r\nSetting up libxpm4:amd64 (1:3.5.17-1build2) ...\r\nSetting up cpp-13 (13.3.0-6ubuntu2~24.04.1) ...\r\nSetting up gcc-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...\r\nSetting up binutils (2.42-4ubuntu2.10) ...\r\nSetting up gcc-13 (13.3.0-6ubuntu2~24.04.1) ...\r\nSetting up cpp (4:13.2.0-7ubuntu1) ...\r\nSetting up gcc-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...\r\nSetting up gcc (4:13.2.0-7ubuntu1) ...\r\nSetting up libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...\r\nSetting up libheif1:amd64 (1.17.6-1ubuntu4.2) ...\r\nSetting up libgd3:amd64 (2.3.3-9ubuntu5) ...\r\nSetting up libc-devtools (2.39-0ubuntu8.7) ...\r\nSetting up libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...\r\nSetting up libheif-plugin-aomenc:amd64 (1.17.6-1ubuntu4.2) ...\r\nProcessing triggers for libc-bin (2.39-0ubuntu8.7) ...\nW: Failed to fetch http://archive.ubuntu.com/ubuntu/dists/noble/InRelease  Connection failed [IP: 198.18.0.18 80]\nW: Failed to fetch http://security.ubuntu.com/ubuntu/dists/noble-security/InRelease  Connection failed [IP: 198.18.0.17 80]\nW: Some index files failed to download. They have been ignored, or old ones used instead.\ndebconf: delaying package configuration, since apt-utils is not installed\n\nProcess exited with code 0.",
+      "observation": {
+        "results": [
+          {
+            "content": "jbig0 libjpeg-turbo8 libjpeg8 liblerc4 liblsan0\n  libmpc3 libmpfr6 libpng16-16t64 libquadmath0 libsframe1 libsharpyuv0\n  libtiff6 libtsan2 libubsan1 libwebp7 libx11-6 libx11-data libxau6 libxcb1\n  libxdmcp6 libxpm4 linux-libc-dev make manpages manpages-dev rpcsvc-proto\nThe following packages will be upgraded:\n  gcc-14-base libc-bin libc6 libgcc-s1 libstdc++6\n5 upgraded, 69 newly installed, 0 to remove and 14 not upgraded.\nNeed to get 69.7 MB of archives.\nAfter this operation, 215 MB of additional disk space will be used.\nGet:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-14-base amd64 14.2.0-4ubuntu2~24.04.1 [51.0 kB]\nGet:2 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgcc-s1 amd64 14.2.0-4ubuntu2~24.04.1 [78.4 kB]\nGet:3 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libstdc++6 amd64 14.2.0-4ubuntu2~24.04.1 [792 kB]\nGet:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libc6 amd64 2.39-0ubuntu8.7 [3263 kB]\nGet:5 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libc-bin amd64 2.39-0ubuntu8.7 [682 kB]\nGet:6 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]\nGet:7 http://archive.ubuntu.com/ubuntu noble/main amd64 libjansson4 amd64 2.14-2build2 [32.8 kB]\nGet:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpng16-16t64 amd64 1.6.43-5ubuntu0.5 [188 kB]\nGet:9 http://archive.ubuntu.com/ubuntu noble/main amd64 libxau6 amd64 1:1.0.9-1build6 [7160 B]\nGet:10 http://archive.ubuntu.com/ubuntu noble/main amd64 libxdmcp6 amd64 1:1.1.3-0ubuntu6 [10.3 kB]\nGet:11 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb1 amd64 1.15-1ubuntu2 [47.7 kB]\nGet:12 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-data all 2:1.8.7-1build1 [115 kB]\nGet:13 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-6 amd64 2:1.8.7-1build1 [650 kB]\nGet:14 http://archive.ubuntu.com/ubuntu noble/main amd64 manpages all 6.7-2 [1384 kB]\nGet:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils-common amd64 2.42-4ubuntu2.10 [240 kB]\nGet:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsframe1 amd64 2.42-4ubuntu2.10 [15.7 kB]\nGet:17 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbinutils amd64 2.42-4ubuntu2.10 [577 kB]\nGet:18 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libctf-nobfd0 amd64 2.42-4ubuntu2.10 [98.0 kB]\nGet:19 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libctf0 amd64 2.42-4ubuntu2.10 [94.5 kB]\nGet:20 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgprofng0 amd64 2.42-4ubuntu2.10 [849 kB]\nGet:21 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils-x86-64-linux-gnu amd64 2.42-4ubuntu2.10 [2463 kB]\nGet:22 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils amd64 2.42-4ubuntu2.10 [18.2 kB]\nGet:23 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13-base amd64 13.3.0-6ubuntu2~24.04.1 [51.6 kB]\nGet:24 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libisl23 amd64 0.26-3build1.1 [680 kB]\nGet:25 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libmpfr6 amd64 4.2.1-1build1.1 [353 kB]\nGet:26 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libmpc3 amd64 1.3.1-1build1.1 [54.6 kB]\nGet:27 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 cpp-13-x86-64-linux-gnu amd64 13.3.0-6ubuntu2~24.04.1 [10.7 MB]\nGet:28 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 cpp-13 amd64 13.3.0-6ubuntu2~24.04.1 [1042 B]\nGet:29 http://archive.ubuntu.com/ubuntu noble/main amd64 cpp-x86-64-linux-gnu amd64 4:13.2.0-7ubuntu1 [5326 B]\nGet:30 http://archive.ubuntu.com/ubuntu noble/main amd64 cpp amd64 4:13.2.0-7ubuntu1 [22.4 kB]\nGet:31 http://archive.ubuntu.com/ubuntu noble/main amd64 fonts-dejavu-mono all 2.37-8 [502 kB]\nGet:32 http://archive.ubuntu.com/ubuntu noble/main amd64 fonts-dejavu-core all 2.37-8 [835 kB]\nGet:33 http://archive.ubuntu.com/ubuntu noble/main amd64 fontconfig-config amd64 2.15.0-1.1ubuntu2 [37.3 kB]\nGet:34 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcc1-0 amd64 14.2.0-4ubuntu2~24.04.1 [48.0 kB]\nGet:35 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgomp1 amd64 14.2.0-4ubuntu2~24.04.1 [148 kB]\nGet:36 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libitm1 amd64 14.2.0-4ubuntu2~24.04.1 [29.7 kB]\nGet:37 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libatomic1 amd64 14.2.0-4ubuntu2~24.04.1 [10.5 kB]\nGet:38 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libasan8 amd64 14.2.0-4ubuntu2~24.04.1 [3027 kB]\nGet:39 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 liblsan0 amd64 14.2.0-4ubuntu2~24.04.1 [1322 kB]\nGet:40 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libtsan2 amd64 14.2.0-4ubuntu2~24.04.1 [2772 kB]\nGet:41 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libubsan1 amd64 14.2.0-4ubuntu2~24.04.1 [1184 kB]\nGet:42 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libhwasan0 amd64 14.2.0-4ubuntu2~24.04.1 [1641 kB]\nGet:43 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libquadmath0 amd64 14.2.0-4ubuntu2~24.04.1 [153 kB]\nGet:44 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgcc-13-dev amd64 13.3.0-6ubuntu2~24.04.1 [2681 kB]\nGet:45 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13-x86-64-linux-gnu amd64 13.3.0-6ubuntu2~24.04.1 [21.1 MB]\nGet:46 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13 amd64 13.3.0-6ubuntu2~24.04.1 [494 kB]\nGet:47 http://archive.ubuntu.com/ubuntu noble/main amd64 gcc-x86-64-linux-gnu amd64 4:13.2.0-7ubuntu1 [1212 B]\nGet:48 http://archive.ubuntu.com/ubuntu noble/main amd64 gcc amd64 4:13.2.0-7ubuntu1 [5018 B]\nGet:49 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libaom3 amd64 3.8.2-2ubuntu0.1 [1941 kB]\nGet:50 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libc-dev-bin amd64 2.39-0ubuntu8.7 [20.4 kB]\nGet:51 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libfreetype6 amd64 2.13.2+dfsg-1ubuntu0.1 [402 kB]\nGet:52 http://archive.ubuntu.com/ubuntu noble/main amd64 libfontconfig1 amd64 2.15.0-1.1ubuntu2 [139 kB]\nGet:53 http://archive.ubuntu.com/ubuntu noble/main amd64 libsharpyuv0 amd64 1.3.2-0.4build3 [15.8 kB]\nGet:54 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-aomdec amd64 1.17.6-1ubuntu4.2 [10.6 kB]\nGet:55 http://archive.ubuntu.com/ubuntu noble/main amd64 libde265-0 amd64 1.0.15-1build3 [166 kB]\nGet:56 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-libde265 amd64 1.17.6-1ubuntu4.2 [8174 B]\nGet:57 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif1 amd64 1.17.6-1ubuntu4.2 [276 kB]\nGet:58 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-turbo8 amd64 2.1.5-2ubuntu2 [150 kB]\nGet:59 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg8 amd64 8c-2ubuntu11 [2148 B]\nGet:60 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdeflate0 amd64 1.19-1build1.1 [43.9 kB]\nGet:61 http://archive.ubuntu.com/ubuntu noble/main amd64 libjbig0 amd64 2.1-6.1ubuntu2 [29.7 kB]\nGet:62 http://archive.ubuntu.com/ubuntu noble/main amd64 liblerc4 amd64 4.0.0+ds-4ubuntu2 [179 kB]\nGet:63 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebp7 amd64 1.3.2-0.4build3 [230 kB]\nGet:64 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libtiff6 amd64 4.5.1+git230720-4ubuntu2.5 [200 kB]\nGet:65 http://archive.ubuntu.com/ubuntu noble/main amd64 libxpm4 amd64 1:3.5.17-1build2 [36.5 kB]\nGet:66 http://archive.ubuntu.com/ubuntu noble/main amd64 libgd3 amd64 2.3.3-9ubuntu5 [128 kB]\nGet:67 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libc-devtools amd64 2.39-0ubuntu8.7 [29.3 kB]\nGet:68 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-libc-dev amd64 6.8.0-110.110 [1587 kB]\nGet:69 http://archive.ubuntu.com/ubuntu noble/main amd64 libcrypt-dev amd64 1:4.4.36-4build1 [112 kB]\nGet:70 http://archive.ubuntu.com/ubuntu noble/main amd64 rpcsvc-proto amd64 1.4.2-0ubuntu7 [67.4 kB]\nGet:71 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libc6-dev amd64 2.39-0ubuntu8.7 [2124 kB]\nGet:72 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-aomenc amd64 1.17.6-1ubuntu4.2 [14.7 kB]\nGet:73 http://archive.ubuntu.com/ubuntu noble/main amd64 make amd64 4.3-4.1build2 [180 kB]\nGet:74 http://archive.ubuntu.com/ubuntu noble/main amd64 manpages-dev all 6.7-2 [2013 kB]\nFetched 69.7 MB in 8s (8798 kB/s)\n(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 8228 files and directories currently installed.)\r\nPreparing to unpack .../gcc-14-base_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking gcc-14-base:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...\r\nSetting up gcc-14-base:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\n(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 8228 files and directories currently installed.)\r\nPreparing to unpack .../libgcc-s1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libgcc-s1:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...\r\nSetting up libgcc-s1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\n(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 8228 files and directories currently installed.)\r\nPreparing to unpack .../libstdc++6_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libstdc++6:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...\r\nSetting up libstdc++6:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\n(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 8228 files and directories currently installed.)\r\nPreparing to unpack .../libc6_2.39-0ubuntu8.7_amd64.deb ...\r\ndebconf: unable to initialize frontend: Dialog\r\ndebconf: (TERM is not set, so the dialog frontend is not usable.)\r\ndebconf: falling back to frontend: Readline\r\ndebconf: unable to initialize frontend: Readline\r\ndebconf: (This frontend requires a controlling tty.)\r\ndebconf: falling back to frontend: Teletype\r\nUnpacking libc6:amd64 (2.39-0ubuntu8.7) over (2.39-0ubuntu8.6) ...\r\nSetting up libc6:amd64 (2.39-0ubuntu8.7) ...\r\ndebconf: unable to initialize frontend: Dialog\r\ndebconf: (TERM is not set, so the dialog frontend is not usable.)\r\ndebconf: falling back to frontend: Readline\r\ndebconf: unable to initialize frontend: Readline\r\ndebconf: (This frontend requires a controlling tty.)\r\ndebconf: falling back to frontend: Teletype\r\n(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 8228 files and directories currently installed.)\r\nPreparing to unpack .../libc-bin_2.39-0ubuntu8.7_amd64.deb ...\r\nUnpacking libc-bin (2.39-0ubuntu8.7) over (2.39-0ubuntu8.6) ...\r\nSetting up libc-bin (2.39-0ubuntu8.7) ...\r\nSelecting previously unselected package libbsd0:amd64.\r\n(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 8228 files and directories currently installed.)\r\nPreparing to unpack .../00-libbsd0_0.12.1-1build1.1_amd64.deb ...\r\nUnpacking libbsd0:amd64 (0.12.1-1build1.1) ...\r\nSelecting previously unselected package libjansson4:amd64.\r\nPreparing to unpack .../01-libjansson4_2.14-2build2_amd64.deb ...\r\nUnpacking libjansson4:amd64 (2.14-2build2) ...\r\nSelecting previously unselected package libpng16-16t64:amd64.\r\nPreparing to unpack .../02-libpng16-16t64_1.6.43-5ubuntu0.5_amd64.deb ...\r\nUnpacking libpng16-16t64:amd64 (1.6.43-5ubuntu0.5) ...\r\nSelecting previously unselected package libxau6:amd64.\r\nPreparing to unpack .../03-libxau6_1%3a1.0.9-1build6_amd64.deb ...\r\nUnpacking libxau6:amd64 (1:1.0.9-1build6) ...\r\nSelecting previously unselected package libxdmcp6:amd64.\r\nPreparing to unpack .../04-libxdmcp6_1%3a1.1.3-0ubuntu6_amd64.deb ...\r\nUnpacking libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...\r\nSelecting previously unselected package libxcb1:amd64.\r\nPreparing to unpack .../05-libxcb1_1.15-1ubuntu2_amd64.deb ...\r\nUnpacking libxcb1:amd64 (1.15-1ubuntu2) ...\r\nSelecting previously unselected package libx11-data.\r\nPreparing to unpack .../06-libx11-data_2%3a1.8.7-1build1_all.deb ...\r\nUnpacking libx11-data (2:1.8.7-1build1) ...\r\nSelecting previously unselected package libx11-6:amd64.\r\nPreparing to unpack .../07-libx11-6_2%3a1.8.7-1build1_amd64.deb ...\r\nUnpacking libx11-6:amd64 (2:1.8.7-1build1) ...\r\nSelecting previously unselected package manpages.\r\nPreparing to unpack .../08-manpages_6.7-2_all.deb ...\r\nUnpacking manpages (6.7-2) ...\r\nSelecting previously unselected package binutils-common:amd64.\r\nPreparing to unpack .../09-binutils-common_2.42-4ubuntu2.10_amd64.deb ...\r\nUnpacking binutils-common:amd64 (2.42-4ubuntu2.10) ...\r\nSelecting previously unselected package libsframe1:amd64.\r\nPreparing to unpack .../10-libsframe1_2.42-4ubuntu2.10_amd64.deb ...\r\nUnpacking libsframe1:amd64 (2.42-4ubuntu2.10) ...\r\nSelecting previously unselected package libbinutils:amd64.\r\nPreparing to unpack .../11-libbinutils_2.42-4ubuntu2.10_amd64.deb ...\r\nUnpacking libbinutils:amd64 (2.42-4ubuntu2.10) ...\r\nSelecting previously unselected package libctf-nobfd0:amd64.\r\nPreparing to unpack .../12-libctf-nobfd0_2.42-4ubuntu2.10_amd64.deb ...\r\nUnpacking libctf-nobfd0:amd64 (2.42-4ubuntu2.10) ...\r\nSelecting previously unselected package libctf0:amd64.\r\nPreparing to unpack .../13-libctf0_2.42-4ubuntu2.10_amd64.deb ...\r\nUnpacking libctf0:amd64 (2.42-4ubuntu2.10) ...\r\nSelecting previously unselected package libgprofng0:amd64.\r\nPreparing to unpack .../14-libgprofng0_2.42-4ubuntu2.10_amd64.deb ...\r\nUnpacking libgprofng0:amd64 (2.42-4ubuntu2.10) ...\r\nSelecting previously unselected package binutils-x86-64-linux-gnu.\r\nPreparing to unpack .../15-binutils-x86-64-linux-gnu_2.42-4ubuntu2.10_amd64.deb ...\r\nUnpacking binutils-x86-64-linux-gnu (2.42-4ubuntu2.10) ...\r\nSelecting previously unselected package binutils.\r\nPreparing to unpack .../16-binutils_2.42-4ubuntu2.10_amd64.deb ...\r\nUnpacking binutils (2.42-4ubuntu2.10) ...\r\nSelecting previously unselected package gcc-13-base:amd64.\r\nPreparing to unpack .../17-gcc-13-base_13.3.0-6ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking gcc-13-base:amd64 (13.3.0-6ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libisl23:amd64.\r\nPreparing to unpack .../18-libisl23_0.26-3build1.1_amd64.deb ...\r\nUnpacking libisl23:amd64 (0.26-3build1.1) ...\r\nSelecting previously unselected package libmpfr6:amd64.\r\nPreparing to unpack .../19-libmpfr6_4.2.1-1build1.1_amd64.deb ...\r\nUnpacking libmpfr6:amd64 (4.2.1-1build1.1) ...\r\nSelecting previously unselected package libmpc3:amd64.\r\nPreparing to unpack .../20-libmpc3_1.3.1-1build1.1_amd64.deb ...\r\nUnpacking libmpc3:amd64 (1.3.1-1build1.1) ...\r\nSelecting previously unselected package cpp-13-x86-64-linux-gnu.\r\nPreparing to unpack .../21-cpp-13-x86-64-linux-gnu_13.3.0-6ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking cpp-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...\r\nSelecting previously unselected package cpp-13.\r\nPreparing to unpack .../22-cpp-13_13.3.0-6ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking cpp-13 (13.3.0-6ubuntu2~24.04.1) ...\r\nSelecting previously unselected package cpp-x86-64-linux-gnu.\r\nPreparing to unpack .../23-cpp-x86-64-linux-gnu_4%3a13.2.0-7ubuntu1_amd64.deb ...\r\nUnpacking cpp-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...\r\nSelecting previously unselected package cpp.\r\nPreparing to unpack .../24-cpp_4%3a13.2.0-7ubuntu1_amd64.deb ...\r\nUnpacking cpp (4:13.2.0-7ubuntu1) ...\r\nSelecting previously unselected package fonts-dejavu-mono.\r\nPreparing to unpack .../25-fonts-dejavu-mono_2.37-8_all.deb ...\r\nUnpacking fonts-dejavu-mono (2.37-8) ...\r\nSelecting previously unselected package fonts-dejavu-core.\r\nPreparing to unpack .../26-fonts-dejavu-core_2.37-8_all.deb ...\r\nUnpacking fonts-dejavu-core (2.37-8) ...\r\nSelecting previously unselected package fontconfig-config.\r\nPreparing to unpack .../27-fontconfig-config_2.15.0-1.1ubuntu2_amd64.deb ...\r\nUnpacking fontconfig-config (2.15.0-1.1ubuntu2) ...\r\nSelecting previously unselected package libcc1-0:amd64.\r\nPreparing to unpack .../28-libcc1-0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libcc1-0:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libgomp1:amd64.\r\nPreparing to unpack .../29-libgomp1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libgomp1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libitm1:amd64.\r\nPreparing to unpack .../30-libitm1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libitm1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libatomic1:amd64.\r\nPreparing to unpack .../31-libatomic1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libatomic1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libasan8:amd64.\r\nPreparing to unpack .../32-libasan8_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libasan8:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package liblsan0:amd64.\r\nPreparing to unpack .../33-liblsan0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking liblsan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libtsan2:amd64.\r\nPreparing to unpack .../34-libtsan2_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libtsan2:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libubsan1:amd64.\r\nPreparing to unpack .../35-libubsan1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libubsan1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libhwasan0:amd64.\r\nPreparing to unpack .../36-libhwasan0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libhwasan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libquadmath0:amd64.\r\nPreparing to unpack .../37-libquadmath0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libquadmath0:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSelecting previously unselected package libgcc-13-dev:amd64.\r\nPreparing to unpack .../38-libgcc-13-dev_13.3.0-6ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking libgcc-13-dev:amd64 (13.3.0-6ubuntu2~24.04.1) ...\r\nSelecting previously unselected package gcc-13-x86-64-linux-gnu.\r\nPreparing to unpack .../39-gcc-13-x86-64-linux-gnu_13.3.0-6ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking gcc-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...\r\nSelecting previously unselected package gcc-13.\r\nPreparing to unpack .../40-gcc-13_13.3.0-6ubuntu2~24.04.1_amd64.deb ...\r\nUnpacking gcc-13 (13.3.0-6ubuntu2~24.04.1) ...\r\nSelecting previously unselected package gcc-x86-64-linux-gnu.\r\nPreparing to unpack .../41-gcc-x86-64-linux-gnu_4%3a13.2.0-7ubuntu1_amd64.deb ...\r\nUnpacking gcc-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...\r\nSelecting previously unselected package gcc.\r\nPreparing to unpack .../42-gcc_4%3a13.2.0-7ubuntu1_amd64.deb ...\r\nUnpacking gcc (4:13.2.0-7ubuntu1) ...\r\nSelecting previously unselected package libaom3:amd64.\r\nPreparing to unpack .../43-libaom3_3.8.2-2ubuntu0.1_amd64.deb ...\r\nUnpacking libaom3:amd64 (3.8.2-2ubuntu0.1) ...\r\nSelecting previously unselected package libc-dev-bin.\r\nPreparing to unpack .../44-libc-dev-bin_2.39-0ubuntu8.7_amd64.deb ...\r\nUnpacking libc-dev-bin (2.39-0ubuntu8.7) ...\r\nSelecting previously unselected package libfreetype6:amd64.\r\nPreparing to unpack .../45-libfreetype6_2.13.2+dfsg-1ubuntu0.1_amd64.deb ...\r\nUnpacking libfreetype6:amd64 (2.13.2+dfsg-1ubuntu0.1) ...\r\nSelecting previously unselected package libfontconfig1:amd64.\r\nPreparing to unpack .../46-libfontconfig1_2.15.0-1.1ubuntu2_amd64.deb ...\r\nUnpacking libfontconfig1:amd64 (2.15.0-1.1ubuntu2) ...\r\nSelecting previously unselected package libsharpyuv0:amd64.\r\nPreparing to unpack .../47-libsharpyuv0_1.3.2-0.4build3_amd64.deb ...\r\nUnpacking libsharpyuv0:amd64 (1.3.2-0.4build3) ...\r\nSelecting previously unselected package libheif-plugin-aomdec:amd64.\r\nPreparing to unpack .../48-libheif-plugin-aomdec_1.17.6-1ubuntu4.2_amd64.deb ...\r\nUnpacking libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...\r\nSelecting previously unselected package libde265-0:amd64.\r\nPreparing to unpack .../49-libde265-0_1.0.15-1build3_amd64.deb ...\r\nUnpacking libde265-0:amd64 (1.0.15-1build3) ...\r\nSelecting previously unselected package libheif-plugin-libde265:amd64.\r\nPreparing to unpack .../50-libheif-plugin-libde265_1.17.6-1ubuntu4.2_amd64.deb ...\r\nUnpacking libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...\r\nSelecting previously unselected package libheif1:amd64.\r\nPreparing to unpack .../51-libheif1_1.17.6-1ubuntu4.2_amd64.deb ...\r\nUnpacking libheif1:amd64 (1.17.6-1ubuntu4.2) ...\r\nSelecting previously unselected package libjpeg-turbo8:amd64.\r\nPreparing to unpack .../52-libjpeg-turbo8_2.1.5-2ubuntu2_amd64.deb ...\r\nUnpacking libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...\r\nSelecting previously unselected package libjpeg8:amd64.\r\nPreparing to unpack .../53-libjpeg8_8c-2ubuntu11_amd64.deb ...\r\nUnpacking libjpeg8:amd64 (8c-2ubuntu11) ...\r\nSelecting previously unselected package libdeflate0:amd64.\r\nPreparing to unpack .../54-libdeflate0_1.19-1build1.1_amd64.deb ...\r\nUnpacking libdeflate0:amd64 (1.19-1build1.1) ...\r\nSelecting previously unselected package libjbig0:amd64.\r\nPreparing to unpack .../55-libjbig0_2.1-6.1ubuntu2_amd64.deb ...\r\nUnpacking libjbig0:amd64 (2.1-6.1ubuntu2) ...\r\nSelecting previously unselected package liblerc4:amd64.\r\nPreparing to unpack .../56-liblerc4_4.0.0+ds-4ubuntu2_amd64.deb ...\r\nUnpacking liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...\r\nSelecting previously unselected package libwebp7:amd64.\r\nPreparing to unpack .../57-libwebp7_1.3.2-0.4build3_amd64.deb ...\r\nUnpacking libwebp7:amd64 (1.3.2-0.4build3) ...\r\nSelecting previously unselected package libtiff6:amd64.\r\nPreparing to unpack .../58-libtiff6_4.5.1+git230720-4ubuntu2.5_amd64.deb ...\r\nUnpacking libtiff6:amd64 (4.5.1+git230720-4ubuntu2.5) ...\r\nSelecting previously unselected package libxpm4:amd64.\r\nPreparing to unpack .../59-libxpm4_1%3a3.5.17-1build2_amd64.deb ...\r\nUnpacking libxpm4:amd64 (1:3.5.17-1build2) ...\r\nSelecting previously unselected package libgd3:amd64.\r\nPreparing to unpack .../60-libgd3_2.3.3-9ubuntu5_amd64.deb ...\r\nUnpacking libgd3:amd64 (2.3.3-9ubuntu5) ...\r\nSelecting previously unselected package libc-devtools.\r\nPreparing to unpack .../61-libc-devtools_2.39-0ubuntu8.7_amd64.deb ...\r\nUnpacking libc-devtools (2.39-0ubuntu8.7) ...\r\nSelecting previously unselected package linux-libc-dev:amd64.\r\nPreparing to unpack .../62-linux-libc-dev_6.8.0-110.110_amd64.deb ...\r\nUnpacking linux-libc-dev:amd64 (6.8.0-110.110) ...\r\nSelecting previously unselected package libcrypt-dev:amd64.\r\nPreparing to unpack .../63-libcrypt-dev_1%3a4.4.36-4build1_amd64.deb ...\r\nUnpacking libcrypt-dev:amd64 (1:4.4.36-4build1) ...\r\nSelecting previously unselected package rpcsvc-proto.\r\nPreparing to unpack .../64-rpcsvc-proto_1.4.2-0ubuntu7_amd64.deb ...\r\nUnpacking rpcsvc-proto (1.4.2-0ubuntu7) ...\r\nSelecting previously unselected package libc6-dev:amd64.\r\nPreparing to unpack .../65-libc6-dev_2.39-0ubuntu8.7_amd64.deb ...\r\nUnpacking libc6-dev:amd64 (2.39-0ubuntu8.7) ...\r\nSelecting previously unselected package libheif-plugin-aomenc:amd64.\r\nPreparing to unpack .../66-libheif-plugin-aomenc_1.17.6-1ubuntu4.2_amd64.deb ...\r\nUnpacking libheif-plugin-aomenc:amd64 (1.17.6-1ubuntu4.2) ...\r\nSelecting previously unselected package make.\r\nPreparing to unpack .../67-make_4.3-4.1build2_amd64.deb ...\r\nUnpacking make (4.3-4.1build2) ...\r\nSelecting previously unselected package manpages-dev.\r\nPreparing to unpack .../68-manpages-dev_6.7-2_all.deb ...\r\nUnpacking manpages-dev (6.7-2) ...\r\nSetting up libsharpyuv0:amd64 (1.3.2-0.4build3) ...\r\nSetting up libaom3:amd64 (3.8.2-2ubuntu0.1) ...\r\nSetting up libxau6:amd64 (1:1.0.9-1build6) ...\r\nSetting up liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...\r\nSetting up manpages (6.7-2) ...\r\nSetting up binutils-common:amd64 (2.42-4ubuntu2.10) ...\r\nSetting up libdeflate0:amd64 (1.19-1build1.1) ...\r\nSetting up linux-libc-dev:amd64 (6.8.0-110.110) ...\r\nSetting up libctf-nobfd0:amd64 (2.42-4ubuntu2.10) ...\r\nSetting up libgomp1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up libjbig0:amd64 (2.1-6.1ubuntu2) ...\r\nSetting up libsframe1:amd64 (2.42-4ubuntu2.10) ...\r\nSetting up libjansson4:amd64 (2.14-2build2) ...\r\nSetting up rpcsvc-proto (1.4.2-0ubuntu7) ...\r\nSetting up gcc-13-base:amd64 (13.3.0-6ubuntu2~24.04.1) ...\r\nSetting up libx11-data (2:1.8.7-1build1) ...\r\nSetting up make (4.3-4.1build2) ...\r\nSetting up libmpfr6:amd64 (4.2.1-1build1.1) ...\r\nSetting up libquadmath0:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up fonts-dejavu-mono (2.37-8) ...\r\nSetting up libpng16-16t64:amd64 (1.6.43-5ubuntu0.5) ...\r\nSetting up libmpc3:amd64 (1.3.1-1build1.1) ...\r\nSetting up libatomic1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up fonts-dejavu-core (2.37-8) ...\r\nSetting up libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...\r\nSetting up libwebp7:amd64 (1.3.2-0.4build3) ...\r\nSetting up libubsan1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up libhwasan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up libcrypt-dev:amd64 (1:4.4.36-4build1) ...\r\nSetting up libasan8:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up libtsan2:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up libbinutils:amd64 (2.42-4ubuntu2.10) ...\r\nSetting up libisl23:amd64 (0.26-3build1.1) ...\r\nSetting up libde265-0:amd64 (1.0.15-1build3) ...\r\nSetting up libc-dev-bin (2.39-0ubuntu8.7) ...\r\nSetting up libbsd0:amd64 (0.12.1-1build1.1) ...\r\nSetting up libcc1-0:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up liblsan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up libitm1:amd64 (14.2.0-4ubuntu2~24.04.1) ...\r\nSetting up libctf0:amd64 (2.42-4ubuntu2.10) ...\r\nSetting up libjpeg8:amd64 (8c-2ubuntu11) ...\r\nSetting up manpages-dev (6.7-2) ...\r\nSetting up libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...\r\nSetting up libxcb1:amd64 (1.15-1ubuntu2) ...\r\nSetting up cpp-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...\r\nSetting up fontconfig-config (2.15.0-1.1ubuntu2) ...\r\nSetting up libgprofng0:amd64 (2.42-4ubuntu2.10) ...\r\nSetting up libfreetype6:amd64 (2.13.2+dfsg-1ubuntu0.1) ...\r\nSetting up libgcc-13-dev:amd64 (13.3.0-6ubuntu2~24.04.1) ...\r\nSetting up libtiff6:amd64 (4.5.1+git230720-4ubuntu2.5) ...\r\nSetting up libc6-dev:amd64 (2.39-0ubuntu8.7) ...\r\nSetting up libx11-6:amd64 (2:1.8.7-1build1) ...\r\nSetting up libfontconfig1:amd64 (2.15.0-1.1ubuntu2) ...\r\nSetting up binutils-x86-64-linux-gnu (2.42-4ubuntu2.10) ...\r\nSetting up cpp-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...\r\nSetting up libxpm4:amd64 (1:3.5.17-1build2) ...\r\nSetting up cpp-13 (13.3.0-6ubuntu2~24.04.1) ...\r\nSetting up gcc-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...\r\nSetting up binutils (2.42-4ubuntu2.10) ...\r\nSetting up gcc-13 (13.3.0-6ubuntu2~24.04.1) ...\r\nSetting up cpp (4:13.2.0-7ubuntu1) ...\r\nSetting up gcc-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...\r\nSetting up gcc (4:13.2.0-7ubuntu1) ...\r\nSetting up libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...\r\nSetting up libheif1:amd64 (1.17.6-1ubuntu4.2) ...\r\nSetting up libgd3:amd64 (2.3.3-9ubuntu5) ...\r\nSetting up libc-devtools (2.39-0ubuntu8.7) ...\r\nSetting up libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...\r\nSetting up libheif-plugin-aomenc:amd64 (1.17.6-1ubuntu4.2) ...\r\nProcessing triggers for libc-bin (2.39-0ubuntu8.7) ...\nW: Failed to fetch http://archive.ubuntu.com/ubuntu/dists/noble/InRelease  Connection failed [IP: 198.18.0.18 80]\nW: Failed to fetch http://security.ubuntu.com/ubuntu/dists/noble-security/InRelease  Connection failed [IP: 198.18.0.17 80]\nW: Some index files failed to download. They have been ignored, or old ones used instead.\ndebconf: delaying package configuration, since apt-utils is not installed\n\nProcess exited with code 0."
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-534a199e91f74666bee2013aa9b35112",
+        "exec_exit_code": 0,
+        "exec_status": "completed",
+        "exec_duration_ms": null
+      }
+    },
+    {
+      "step_id": 22,
+      "timestamp": "2026-04-15T15:13:26.407000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "Now I'll configure and build SQLite with gcov instrumentation:",
+      "reasoning_content": "GCC is now installed. Let me configure and build SQLite with gcov instrumentation.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-feb50392cb6d49f784a48c86cb81f1de",
+          "function_name": "exec",
+          "arguments": {
+            "command": "cd /app/sqlite/sqlite && ./configure --help 2>&1 | head -80"
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 10813,
+        "completion_tokens": 74,
+        "cached_tokens": 20250,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 31137
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 23,
+      "timestamp": "2026-04-15T15:13:34.063000Z",
+      "source": "agent",
+      "message": "No installed jimsh or tclsh, building local bootstrap jimsh0\nUsage: configure [options] [settings]\n\nThis is autosetup v0.7.2, a build environment \"autoconfigurator\"\nSee the documentation online at https://msteveb.github.io/autosetup/\n\n  --help?=all?                     display help and options. Optional: module\n                                   name, such as --help=system\n  --license                        display the autosetup license\n  --version                        display the version of autosetup\n  --reference?=text?               display the autosetup command reference.\n                                   'text', 'wiki', 'asciidoc' or 'markdown'\n  --autosetup-debug                display debugging output as autosetup runs\n  --install?=.?                    install autosetup to the current or given\n                                   directory\n  --init?=help?                    create initial auto.def, etc. Use\n                                   --init=help for known types\n  --host=host-alias                a complete or partial cpu-vendor-opsys for\n                                   the system where the application will run\n                                   (defaults to the same value as --build)\n  --build=build-alias              a complete or partial cpu-vendor-opsys for\n                                   the system where the application will be\n                                   built (defaults to the result of running\n                                   config.guess)\n  --prefix=dir                     the target directory for the build\n                                   (default: '/usr/local')\nLocal Options:\n  --disable-shared                 Disable build of shared library\n  --disable-static                 Disable build of static library\n  --disable-amalgamation           Disable the amalgamation and instead build\n                                   all files separately\n  --disable-threadsafe             Disable mutexing\n  --with-tempstore?=no?            Use an in-RAM database for temporary\n                                   tables: never,no,yes,always\n  --disable-load-extension         Disable loading of external extensions\n  --disable-math                   Disable math functions\n  --disable-json                   Disable JSON functions\n  --memsys5                        Enable MEMSYS5\n  --memsys3                        Enable MEMSYS3\n  --fts3                           Enable the FTS3 extension\n  --fts4                           Enable the FTS4 extension\n  --fts5                           Enable the FTS5 extension\n  --update-limit                   Enable the UPDATE/DELETE LIMIT clause\n  --geopoly                        Enable the GEOPOLY extension\n  --rtree                          Enable the RTREE extension\n  --session                        Enable the SESSION extension\n  --all                            Enable these extensions: fts4 fts5 rtree\n                                   geopoly session\n  --disable-largefile              This legacy flag has no effect on the\n                                   library but may influence the generated\n                                   sqlite_cfg.h by adding #define HAVE_LFS\n  --disable-tcl                    Disable components which require TCL,\n                                   including all tests. This tree requires TCL\n                                   for code generation but can use the in-tree\n                                   copy of autosetup/jimsh0.c for that. The\n                                   SQLite TCL extension and the test code\n                                   require a canonical tclsh.\n  --with-tcl=DIR                   Directory containing tclConfig.sh or a\n                                   directory one level up from that, from\n                                   which we can derive a directory containing\n                                   tclConfig.sh. A dir name of \"prefix\" is\n                                   equivalent to the directory specified by\n                                   the --prefix flag.\n  --with-tclsh=PATH                Full pathname of tclsh to use. It is used\n                                   for (A) trying to find tclConfig.sh and (B)\n                                   all TCL-based code generation. Warning: if\n                                   its containing dir has multiple tclsh\n                                   versions, it may select the wrong\n                                   tclConfig.sh!\n  --static-tclsqlite3              Statically-link tclsqlite3. This only works\n                                   if TCL support is enabled and all requisite\n                                   libraries are available in static form.\n                                   Note that glibc is unable to fully\n                                   statically link certain libraries required\n                                   by tclsqlite3, so this won't work on most\n                                   Linux environments.\n  --disable-readline               Disable readline support\n  --with-readline-ldflags?=auto?   Readline LDFLAGS, e.g. -lreadline -lncurses\n  --with-readline-cflags?=auto?    Readline CFLAGS, e.g. -I/path/to/includes\n  --with-readline-header=PATH      Full path to readline.h, from which",
+      "observation": {
+        "results": [
+          {
+            "content": "No installed jimsh or tclsh, building local bootstrap jimsh0\nUsage: configure [options] [settings]\n\nThis is autosetup v0.7.2, a build environment \"autoconfigurator\"\nSee the documentation online at https://msteveb.github.io/autosetup/\n\n  --help?=all?                     display help and options. Optional: module\n                                   name, such as --help=system\n  --license                        display the autosetup license\n  --version                        display the version of autosetup\n  --reference?=text?               display the autosetup command reference.\n                                   'text', 'wiki', 'asciidoc' or 'markdown'\n  --autosetup-debug                display debugging output as autosetup runs\n  --install?=.?                    install autosetup to the current or given\n                                   directory\n  --init?=help?                    create initial auto.def, etc. Use\n                                   --init=help for known types\n  --host=host-alias                a complete or partial cpu-vendor-opsys for\n                                   the system where the application will run\n                                   (defaults to the same value as --build)\n  --build=build-alias              a complete or partial cpu-vendor-opsys for\n                                   the system where the application will be\n                                   built (defaults to the result of running\n                                   config.guess)\n  --prefix=dir                     the target directory for the build\n                                   (default: '/usr/local')\nLocal Options:\n  --disable-shared                 Disable build of shared library\n  --disable-static                 Disable build of static library\n  --disable-amalgamation           Disable the amalgamation and instead build\n                                   all files separately\n  --disable-threadsafe             Disable mutexing\n  --with-tempstore?=no?            Use an in-RAM database for temporary\n                                   tables: never,no,yes,always\n  --disable-load-extension         Disable loading of external extensions\n  --disable-math                   Disable math functions\n  --disable-json                   Disable JSON functions\n  --memsys5                        Enable MEMSYS5\n  --memsys3                        Enable MEMSYS3\n  --fts3                           Enable the FTS3 extension\n  --fts4                           Enable the FTS4 extension\n  --fts5                           Enable the FTS5 extension\n  --update-limit                   Enable the UPDATE/DELETE LIMIT clause\n  --geopoly                        Enable the GEOPOLY extension\n  --rtree                          Enable the RTREE extension\n  --session                        Enable the SESSION extension\n  --all                            Enable these extensions: fts4 fts5 rtree\n                                   geopoly session\n  --disable-largefile              This legacy flag has no effect on the\n                                   library but may influence the generated\n                                   sqlite_cfg.h by adding #define HAVE_LFS\n  --disable-tcl                    Disable components which require TCL,\n                                   including all tests. This tree requires TCL\n                                   for code generation but can use the in-tree\n                                   copy of autosetup/jimsh0.c for that. The\n                                   SQLite TCL extension and the test code\n                                   require a canonical tclsh.\n  --with-tcl=DIR                   Directory containing tclConfig.sh or a\n                                   directory one level up from that, from\n                                   which we can derive a directory containing\n                                   tclConfig.sh. A dir name of \"prefix\" is\n                                   equivalent to the directory specified by\n                                   the --prefix flag.\n  --with-tclsh=PATH                Full pathname of tclsh to use. It is used\n                                   for (A) trying to find tclConfig.sh and (B)\n                                   all TCL-based code generation. Warning: if\n                                   its containing dir has multiple tclsh\n                                   versions, it may select the wrong\n                                   tclConfig.sh!\n  --static-tclsqlite3              Statically-link tclsqlite3. This only works\n                                   if TCL support is enabled and all requisite\n                                   libraries are available in static form.\n                                   Note that glibc is unable to fully\n                                   statically link certain libraries required\n                                   by tclsqlite3, so this won't work on most\n                                   Linux environments.\n  --disable-readline               Disable readline support\n  --with-readline-ldflags?=auto?   Readline LDFLAGS, e.g. -lreadline -lncurses\n  --with-readline-cflags?=auto?    Readline CFLAGS, e.g. -I/path/to/includes\n  --with-readline-header=PATH      Full path to readline.h, from which"
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-feb50392cb6d49f784a48c86cb81f1de",
+        "exec_exit_code": 0,
+        "exec_status": "completed",
+        "exec_duration_ms": 995
+      }
+    },
+    {
+      "step_id": 24,
+      "timestamp": "2026-04-15T15:13:34.079000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "",
+      "reasoning_content": "I see SQLite uses autosetup configure. I need to configure with coverage flags. Let me see what else is available and then configure with CFLAGS and LDFLAGS for gcov.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-3eba88bf44a94ba280158ce8139a3ef5",
+          "function_name": "exec",
+          "arguments": {
+            "command": "cd /app/sqlite/sqlite && ./configure --prefix=/app/sqlite --disable-tcl CFLAGS=\"-fprofile-arcs -ftest-coverage -g -O0\" LDFLAGS=\"-fprofile-arcs -ftest-coverage\" 2>&1"
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 13367,
+        "completion_tokens": 145,
+        "cached_tokens": 18687,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 32199
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 25,
+      "timestamp": "2026-04-15T15:13:49.752000Z",
+      "source": "agent",
+      "message": "Configuring SQLite version 3.50.4\nHost System...x86_64-pc-linux-gnu\nBuild System...x86_64-pc-linux-gnu\nSource dir = /app/sqlite/sqlite\nBuild dir  = /app/sqlite/sqlite\nC compiler... cc -fprofile-arcs -ftest-coverage -g -O0 \nC++ compiler...  -fprofile-arcs -ftest-coverage -g -O0 \nBuild C compiler...cc\nChecking for stdlib.h...ok\nChecking for sys/types.h...ok\nChecking if -D_FILE_OFFSET_BITS=64 is needed...no\nSQLITE_DEBUG build? no\nLooking for install ... /usr/bin/install\nChecking for int8_t...ok\nChecking for int16_t...ok\nChecking for int32_t...ok\nChecking for int64_t...ok\nChecking for intptr_t...ok\nChecking for uint8_t...ok\nChecking for uint16_t...ok\nChecking for uint32_t...ok\nChecking for uint64_t...ok\nChecking for uintptr_t...ok\nChecking for gmtime_r...ok\nChecking for isnan...ok\nChecking for localtime_r...ok\nChecking for localtime_s...not found\nChecking for strchrnul...ok\nChecking for usleep...ok\nChecking for utime...ok\nChecking for pread...ok\nChecking for pread64...ok\nChecking for pwrite...ok\nChecking for pwrite64...ok\nChecking libs for fdatasync...none needed\nChecking libs for nanosleep...none needed\nChecking for sys/types.h...(cached) ok\nChecking for sys/stat.h...ok\nChecking for dlfcn.h...ok\nChecking for unistd.h...ok\nChecking for stdlib.h...(cached) ok\nChecking for malloc.h...ok\nChecking for memory.h...ok\nChecking for string.h...ok\nChecking for strings.h...ok\nChecking for inttypes.h...ok\nChecking for zlib.h...not found\nUse amalgamation for builds? yes\nUse gcov? no\ntest-runner flags: no\nUse #line macros in the amalgamation: no\nChecking whether the C compiler accepts -fsanitize=address...yes\nChecking whether the C compiler accepts -fsanitize=bounds-strict...yes\n\n    NOTE: TCL is disabled via --disable-tcl. This means that none\n    of the TCL-based components will be built, including tests\n    and sqlite3_analyzer.\n\nChecking for TCL to use for code generation... \nChecking for dirent.h...ok\nChecking for sys/time.h...ok\nChecking for realpath...ok\nTCL for code generation: jimsh\nEmscripten SDK? not found\nStatically link tclsqlite3? no\nStatically link CLI shell? no\nChecking whether the C compiler accepts -rpath /app/sqlite/lib...no\nChecking whether the C compiler accepts -Wl,-rpath,/app/sqlite/lib...yes\nSupport threadsafe operation? Checking for libs...\nChecking libs for pthread_create...none needed\nChecking libs for pthread_mutexattr_init...none needed\nChecking libs for dlopen...none needed\nLoadable extension support enabled.\nChecking libs for ceil...-lm\nEnabling math SQL functions\nICU support is disabled.\nChecking for line-editing capability...\nLine-editing support for the sqlite3 shell: none\nBuild shared library? yes\nBuild static library? yes\nFeature flags...\n  - fts3\n  - fts4\n  - fts5\n  - geopoly\n  - rtree\n  - session\n  - update-limit\n  - memsys5\n  - memsys3\n  - scanstatus\n  + json\nLibrary feature flags: -DSQLITE_ENABLE_MATH_FUNCTIONS -DSQLITE_THREADSAFE=1\nCreated Makefile from Makefile.in\nCreated sqlite3.pc from sqlite3.pc.in\nCreated sqlite_cfg.h",
+      "observation": {
+        "results": [
+          {
+            "content": "Configuring SQLite version 3.50.4\nHost System...x86_64-pc-linux-gnu\nBuild System...x86_64-pc-linux-gnu\nSource dir = /app/sqlite/sqlite\nBuild dir  = /app/sqlite/sqlite\nC compiler... cc -fprofile-arcs -ftest-coverage -g -O0 \nC++ compiler...  -fprofile-arcs -ftest-coverage -g -O0 \nBuild C compiler...cc\nChecking for stdlib.h...ok\nChecking for sys/types.h...ok\nChecking if -D_FILE_OFFSET_BITS=64 is needed...no\nSQLITE_DEBUG build? no\nLooking for install ... /usr/bin/install\nChecking for int8_t...ok\nChecking for int16_t...ok\nChecking for int32_t...ok\nChecking for int64_t...ok\nChecking for intptr_t...ok\nChecking for uint8_t...ok\nChecking for uint16_t...ok\nChecking for uint32_t...ok\nChecking for uint64_t...ok\nChecking for uintptr_t...ok\nChecking for gmtime_r...ok\nChecking for isnan...ok\nChecking for localtime_r...ok\nChecking for localtime_s...not found\nChecking for strchrnul...ok\nChecking for usleep...ok\nChecking for utime...ok\nChecking for pread...ok\nChecking for pread64...ok\nChecking for pwrite...ok\nChecking for pwrite64...ok\nChecking libs for fdatasync...none needed\nChecking libs for nanosleep...none needed\nChecking for sys/types.h...(cached) ok\nChecking for sys/stat.h...ok\nChecking for dlfcn.h...ok\nChecking for unistd.h...ok\nChecking for stdlib.h...(cached) ok\nChecking for malloc.h...ok\nChecking for memory.h...ok\nChecking for string.h...ok\nChecking for strings.h...ok\nChecking for inttypes.h...ok\nChecking for zlib.h...not found\nUse amalgamation for builds? yes\nUse gcov? no\ntest-runner flags: no\nUse #line macros in the amalgamation: no\nChecking whether the C compiler accepts -fsanitize=address...yes\nChecking whether the C compiler accepts -fsanitize=bounds-strict...yes\n\n    NOTE: TCL is disabled via --disable-tcl. This means that none\n    of the TCL-based components will be built, including tests\n    and sqlite3_analyzer.\n\nChecking for TCL to use for code generation... \nChecking for dirent.h...ok\nChecking for sys/time.h...ok\nChecking for realpath...ok\nTCL for code generation: jimsh\nEmscripten SDK? not found\nStatically link tclsqlite3? no\nStatically link CLI shell? no\nChecking whether the C compiler accepts -rpath /app/sqlite/lib...no\nChecking whether the C compiler accepts -Wl,-rpath,/app/sqlite/lib...yes\nSupport threadsafe operation? Checking for libs...\nChecking libs for pthread_create...none needed\nChecking libs for pthread_mutexattr_init...none needed\nChecking libs for dlopen...none needed\nLoadable extension support enabled.\nChecking libs for ceil...-lm\nEnabling math SQL functions\nICU support is disabled.\nChecking for line-editing capability...\nLine-editing support for the sqlite3 shell: none\nBuild shared library? yes\nBuild static library? yes\nFeature flags...\n  - fts3\n  - fts4\n  - fts5\n  - geopoly\n  - rtree\n  - session\n  - update-limit\n  - memsys5\n  - memsys3\n  - scanstatus\n  + json\nLibrary feature flags: -DSQLITE_ENABLE_MATH_FUNCTIONS -DSQLITE_THREADSAFE=1\nCreated Makefile from Makefile.in\nCreated sqlite3.pc from sqlite3.pc.in\nCreated sqlite_cfg.h"
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-3eba88bf44a94ba280158ce8139a3ef5",
+        "exec_exit_code": 0,
+        "exec_status": "completed",
+        "exec_duration_ms": 7644
+      }
+    },
+    {
+      "step_id": 26,
+      "timestamp": "2026-04-15T15:13:49.754000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "Now let me build SQLite:",
+      "reasoning_content": "Good! Configuration succeeded. Now I'll run make to compile SQLite.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-0ae01d520e26498482472763145e8514",
+          "function_name": "exec",
+          "arguments": {
+            "command": "cd /app/sqlite/sqlite && make -j$(nproc) 2>&1"
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 942,
+        "completion_tokens": 63,
+        "cached_tokens": 31999,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 33004
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 27,
+      "timestamp": "2026-04-15T15:14:06.316000Z",
+      "source": "agent",
+      "message": "Command still running (session fast-valley, pid 4588). Use process (list/poll/log/write/kill/clear/remove) for follow-up.",
+      "observation": {
+        "results": [
+          {
+            "content": "Command still running (session fast-valley, pid 4588). Use process (list/poll/log/write/kill/clear/remove) for follow-up."
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-0ae01d520e26498482472763145e8514",
+        "exec_exit_code": null,
+        "exec_status": "running",
+        "exec_duration_ms": null
+      }
+    },
+    {
+      "step_id": 28,
+      "timestamp": "2026-04-15T15:14:06.325000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "",
+      "reasoning_content": "Let me poll for the build to complete.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-b1f9710130364a39bb3498c818dabb27",
+          "function_name": "process",
+          "arguments": {
+            "action": "poll",
+            "sessionId": "fast-valley",
+            "timeout": 120000
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 1013,
+        "completion_tokens": 44,
+        "cached_tokens": 31999,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 33056
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 29,
+      "timestamp": "2026-04-15T15:14:45.313000Z",
+      "source": "agent",
+      "message": "pp/sqlite/sqlite/ext/misc/stmt.c keywordhash.h opcodes.c opcodes.h parse.c parse.h sqlite_cfg.h shell.c sqlite3.h tsrc\nrm -f tsrc/sqlite.h.in tsrc/parse.y\n./jimsh /app/sqlite/sqlite/tool/vdbe-compress.tcl  <tsrc/vdbe.c >vdbe.new\nmv -f vdbe.new tsrc/vdbe.c\ncp fts5.c fts5.h tsrc\ntouch .target_source\n./jimsh /app/sqlite/sqlite/tool/mksqlite3c.tcl --linemacros=0 \ncp tsrc/sqlite3ext.h .\ncp /app/sqlite/sqlite/ext/session/sqlite3session.h .\ncc -fPIC -fprofile-arcs -ftest-coverage -g -O0  -DSQLITE_ENABLE_MATH_FUNCTIONS -DSQLITE_THREADSAFE=1    -D_HAVE_SQLITE_CONFIG_H -DBUILD_sqlite -DNDEBUG -I. -I/app/sqlite/sqlite/src -I/app/sqlite/sqlite/ext/rtree -I/app/sqlite/sqlite/ext/icu -I/app/sqlite/sqlite/ext/fts3 -I/app/sqlite/sqlite/ext/session -I/app/sqlite/sqlite/ext/misc -c sqlite3.c\ncc -fPIC -fprofile-arcs -ftest-coverage -g -O0  -DSQLITE_ENABLE_MATH_FUNCTIONS -DSQLITE_THREADSAFE=1    -D_HAVE_SQLITE_CONFIG_H -DBUILD_sqlite -DNDEBUG -I. -I/app/sqlite/sqlite/src -I/app/sqlite/sqlite/ext/rtree -I/app/sqlite/sqlite/ext/icu -I/app/sqlite/sqlite/ext/fts3 -I/app/sqlite/sqlite/ext/session -I/app/sqlite/sqlite/ext/misc  -o sqlite3 \\\n\tshell.c sqlite3.c \\\n\t \\\n\t -DSQLITE_DQS=0 -DSQLITE_ENABLE_FTS4 -DSQLITE_ENABLE_RTREE -DSQLITE_ENABLE_EXPLAIN_COMMENTS -DSQLITE_ENABLE_UNKNOWN_SQL_FUNCTION -DSQLITE_ENABLE_STMTVTAB -DSQLITE_ENABLE_DBPAGE_VTAB -DSQLITE_ENABLE_DBSTAT_VTAB -DSQLITE_ENABLE_BYTECODE_VTAB -DSQLITE_ENABLE_OFFSET_SQL_FUNC -DSQLITE_STRICT_SUBTYPE=1  \\\n\t-Wl,-rpath,/app/sqlite/lib  -lm     -fprofile-arcs -ftest-coverage \nar cr libsqlite3.a sqlite3.o\ncc -fPIC -fprofile-arcs -ftest-coverage -g -O0  -DSQLITE_ENABLE_MATH_FUNCTIONS -DSQLITE_THREADSAFE=1    -D_HAVE_SQLITE_CONFIG_H -DBUILD_sqlite -DNDEBUG -I. -I/app/sqlite/sqlite/src -I/app/sqlite/sqlite/ext/rtree -I/app/sqlite/sqlite/ext/icu -I/app/sqlite/sqlite/ext/fts3 -I/app/sqlite/sqlite/ext/session -I/app/sqlite/sqlite/ext/misc  -shared -o libsqlite3.so sqlite3.o -Wl,-rpath,/app/sqlite/lib  -lm     -fprofile-arcs -ftest-coverage \\\n\t \n\n\nProcess exited with code 0.",
+      "observation": {
+        "results": [
+          {
+            "content": "pp/sqlite/sqlite/ext/misc/stmt.c keywordhash.h opcodes.c opcodes.h parse.c parse.h sqlite_cfg.h shell.c sqlite3.h tsrc\nrm -f tsrc/sqlite.h.in tsrc/parse.y\n./jimsh /app/sqlite/sqlite/tool/vdbe-compress.tcl  <tsrc/vdbe.c >vdbe.new\nmv -f vdbe.new tsrc/vdbe.c\ncp fts5.c fts5.h tsrc\ntouch .target_source\n./jimsh /app/sqlite/sqlite/tool/mksqlite3c.tcl --linemacros=0 \ncp tsrc/sqlite3ext.h .\ncp /app/sqlite/sqlite/ext/session/sqlite3session.h .\ncc -fPIC -fprofile-arcs -ftest-coverage -g -O0  -DSQLITE_ENABLE_MATH_FUNCTIONS -DSQLITE_THREADSAFE=1    -D_HAVE_SQLITE_CONFIG_H -DBUILD_sqlite -DNDEBUG -I. -I/app/sqlite/sqlite/src -I/app/sqlite/sqlite/ext/rtree -I/app/sqlite/sqlite/ext/icu -I/app/sqlite/sqlite/ext/fts3 -I/app/sqlite/sqlite/ext/session -I/app/sqlite/sqlite/ext/misc -c sqlite3.c\ncc -fPIC -fprofile-arcs -ftest-coverage -g -O0  -DSQLITE_ENABLE_MATH_FUNCTIONS -DSQLITE_THREADSAFE=1    -D_HAVE_SQLITE_CONFIG_H -DBUILD_sqlite -DNDEBUG -I. -I/app/sqlite/sqlite/src -I/app/sqlite/sqlite/ext/rtree -I/app/sqlite/sqlite/ext/icu -I/app/sqlite/sqlite/ext/fts3 -I/app/sqlite/sqlite/ext/session -I/app/sqlite/sqlite/ext/misc  -o sqlite3 \\\n\tshell.c sqlite3.c \\\n\t \\\n\t -DSQLITE_DQS=0 -DSQLITE_ENABLE_FTS4 -DSQLITE_ENABLE_RTREE -DSQLITE_ENABLE_EXPLAIN_COMMENTS -DSQLITE_ENABLE_UNKNOWN_SQL_FUNCTION -DSQLITE_ENABLE_STMTVTAB -DSQLITE_ENABLE_DBPAGE_VTAB -DSQLITE_ENABLE_DBSTAT_VTAB -DSQLITE_ENABLE_BYTECODE_VTAB -DSQLITE_ENABLE_OFFSET_SQL_FUNC -DSQLITE_STRICT_SUBTYPE=1  \\\n\t-Wl,-rpath,/app/sqlite/lib  -lm     -fprofile-arcs -ftest-coverage \nar cr libsqlite3.a sqlite3.o\ncc -fPIC -fprofile-arcs -ftest-coverage -g -O0  -DSQLITE_ENABLE_MATH_FUNCTIONS -DSQLITE_THREADSAFE=1    -D_HAVE_SQLITE_CONFIG_H -DBUILD_sqlite -DNDEBUG -I. -I/app/sqlite/sqlite/src -I/app/sqlite/sqlite/ext/rtree -I/app/sqlite/sqlite/ext/icu -I/app/sqlite/sqlite/ext/fts3 -I/app/sqlite/sqlite/ext/session -I/app/sqlite/sqlite/ext/misc  -shared -o libsqlite3.so sqlite3.o -Wl,-rpath,/app/sqlite/lib  -lm     -fprofile-arcs -ftest-coverage \\\n\t \n\n\nProcess exited with code 0."
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-b1f9710130364a39bb3498c818dabb27",
+        "exec_exit_code": 0,
+        "exec_status": "completed",
+        "exec_duration_ms": null
+      }
+    },
+    {
+      "step_id": 30,
+      "timestamp": "2026-04-15T15:14:45.319000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "Build succeeded. Now installing:",
+      "reasoning_content": "Build succeeded. Now I need to:\n1. Install SQLite to /app/sqlite\n2. Add it to PATH\n\nLet me install it and then set up PATH properly.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-4367cdebf57e49c5b3a976eb84bd7b4c",
+          "function_name": "exec",
+          "arguments": {
+            "command": "cd /app/sqlite/sqlite && make install 2>&1"
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 776,
+        "completion_tokens": 102,
+        "cached_tokens": 32959,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 33837
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 31,
+      "timestamp": "2026-04-15T15:15:06.034000Z",
+      "source": "agent",
+      "message": "+ /usr/bin/install -d /app/sqlite/lib/pkgconfig\n/usr/bin/install -m 0644 sqlite3.pc \"/app/sqlite/lib/pkgconfig\"\nif [ x != \"x\" ] && [ -f \"\" ]; then \\\n\t/usr/bin/install  \"/app/sqlite/lib\"; \\\nfi\n/usr/bin/install libsqlite3.so \"/app/sqlite/lib\"\nSetting up libsqlite3.so version symlinks...\nlrwxrwxrwx 1 root root      20 Apr 15 15:15 libsqlite3.so -> libsqlite3.so.3.50.4\nlrwxrwxrwx 1 root root      20 Apr 15 15:15 libsqlite3.so.0 -> libsqlite3.so.3.50.4\n-rwxr-xr-x 1 root root 3461960 Apr 15 15:15 libsqlite3.so.3.50.4\n/usr/bin/install -m 0644 libsqlite3.a \"/app/sqlite/lib\"\n+ /usr/bin/install -d /app/sqlite/include\n/usr/bin/install -m 0644 sqlite3.h \"/app/sqlite/sqlite/src/sqlite3ext.h\" \"/app/sqlite/include\"\nTCL support disabled, so not installing libtclsqlite3.so\n+ /usr/bin/install -d /app/sqlite/bin\n/usr/bin/install sqlite3 \"/app/sqlite/bin\"\n+ /usr/bin/install -d /app/sqlite/share/man/man1\n/usr/bin/install -m 0644 \"/app/sqlite/sqlite/sqlite3.1\" \"/app/sqlite/share/man/man1\"",
+      "observation": {
+        "results": [
+          {
+            "content": "+ /usr/bin/install -d /app/sqlite/lib/pkgconfig\n/usr/bin/install -m 0644 sqlite3.pc \"/app/sqlite/lib/pkgconfig\"\nif [ x != \"x\" ] && [ -f \"\" ]; then \\\n\t/usr/bin/install  \"/app/sqlite/lib\"; \\\nfi\n/usr/bin/install libsqlite3.so \"/app/sqlite/lib\"\nSetting up libsqlite3.so version symlinks...\nlrwxrwxrwx 1 root root      20 Apr 15 15:15 libsqlite3.so -> libsqlite3.so.3.50.4\nlrwxrwxrwx 1 root root      20 Apr 15 15:15 libsqlite3.so.0 -> libsqlite3.so.3.50.4\n-rwxr-xr-x 1 root root 3461960 Apr 15 15:15 libsqlite3.so.3.50.4\n/usr/bin/install -m 0644 libsqlite3.a \"/app/sqlite/lib\"\n+ /usr/bin/install -d /app/sqlite/include\n/usr/bin/install -m 0644 sqlite3.h \"/app/sqlite/sqlite/src/sqlite3ext.h\" \"/app/sqlite/include\"\nTCL support disabled, so not installing libtclsqlite3.so\n+ /usr/bin/install -d /app/sqlite/bin\n/usr/bin/install sqlite3 \"/app/sqlite/bin\"\n+ /usr/bin/install -d /app/sqlite/share/man/man1\n/usr/bin/install -m 0644 \"/app/sqlite/sqlite/sqlite3.1\" \"/app/sqlite/share/man/man1\""
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-4367cdebf57e49c5b3a976eb84bd7b4c",
+        "exec_exit_code": 0,
+        "exec_status": "completed",
+        "exec_duration_ms": 341
+      }
+    },
+    {
+      "step_id": 32,
+      "timestamp": "2026-04-15T15:15:06.036000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "Now let me add it to PATH and verify:",
+      "reasoning_content": "Excellent! Now I need to make it available in the PATH. I'll add /app/sqlite/bin to PATH by updating shell profile or creating a symlink.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-8b3ecdb9b5514645a398eabe8cbe14d9",
+          "function_name": "exec",
+          "arguments": {
+            "command": "ln -sf /app/sqlite/bin/sqlite3 /usr/local/bin/sqlite3 && sqlite3 --version"
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 385,
+        "completion_tokens": 107,
+        "cached_tokens": 33727,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 34219
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 33,
+      "timestamp": "2026-04-15T15:15:19.613000Z",
+      "source": "agent",
+      "message": "3.50.4 2025-07-30 19:33:53 4d8adfb30e03f9cf27f800a2c1ba3c48fb4ca1b08b0f5ed59a4d5ecbf45e20a3 (64-bit)",
+      "observation": {
+        "results": [
+          {
+            "content": "3.50.4 2025-07-30 19:33:53 4d8adfb30e03f9cf27f800a2c1ba3c48fb4ca1b08b0f5ed59a4d5ecbf45e20a3 (64-bit)"
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-8b3ecdb9b5514645a398eabe8cbe14d9",
+        "exec_exit_code": 0,
+        "exec_status": "completed",
+        "exec_duration_ms": 51
+      }
+    },
+    {
+      "step_id": 34,
+      "timestamp": "2026-04-15T15:15:19.617000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "Let me verify the gcov instrumentation is present:",
+      "reasoning_content": "Let me verify gcov instrumentation is present by checking for .gcno files:",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-f5e0c94e5db142b195595f7b821326ff",
+          "function_name": "exec",
+          "arguments": {
+            "command": "ls -la /app/sqlite/sqlite/*.gcno 2>/dev/null | head -5 && echo \"---\" && file /app/sqlite/sqlite/sqlite3.gcno"
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 179,
+        "completion_tokens": 90,
+        "cached_tokens": 34047,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 34316
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 35,
+      "timestamp": "2026-04-15T15:15:31.395000Z",
+      "source": "agent",
+      "message": "-rw-r--r-- 1 root root     303 Apr 15 15:13 /app/sqlite/sqlite/conftest__.gcno\n-rw-r--r-- 1 root root  917626 Apr 15 15:14 /app/sqlite/sqlite/sqlite3-shell.gcno\n-rw-r--r-- 1 root root 4072239 Apr 15 15:14 /app/sqlite/sqlite/sqlite3-sqlite3.gcno\n-rw-r--r-- 1 root root 3380938 Apr 15 15:14 /app/sqlite/sqlite/sqlite3.gcno\n---\nsh: 1: file: not found\n\nCommand not found",
+      "observation": {
+        "results": [
+          {
+            "content": "-rw-r--r-- 1 root root     303 Apr 15 15:13 /app/sqlite/sqlite/conftest__.gcno\n-rw-r--r-- 1 root root  917626 Apr 15 15:14 /app/sqlite/sqlite/sqlite3-shell.gcno\n-rw-r--r-- 1 root root 4072239 Apr 15 15:14 /app/sqlite/sqlite/sqlite3-sqlite3.gcno\n-rw-r--r-- 1 root root 3380938 Apr 15 15:14 /app/sqlite/sqlite/sqlite3.gcno\n---\nsh: 1: file: not found\n\nCommand not found"
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-f5e0c94e5db142b195595f7b821326ff",
+        "exec_exit_code": 127,
+        "exec_status": "failed",
+        "exec_duration_ms": 41
+      }
+    },
+    {
+      "step_id": 36,
+      "timestamp": "2026-04-15T15:15:31.401000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "The `.gcno` files are present, confirming gcov instrumentation. Let me run a quick test to verify coverage data gets generated:",
+      "reasoning_content": "The `.gcno` files are present, which are the gcov notes files generated at compile time. These contain the graph structure for the code. When we run the instrumented binary, it will generate `.gcda` files with the actual coverage data.\n\nLet me verify the instrumentation works by running a quick test and checking for .gcda files.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-23544c3ff2b8413d8e728f9c4130edab",
+          "function_name": "exec",
+          "arguments": {
+            "command": "cd /app/sqlite/sqlite && sqlite3 :memory: \"SELECT 1+1;\" && ls -la *.gcda 2>/dev/null | head -5"
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 269,
+        "completion_tokens": 215,
+        "cached_tokens": 34175,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 34659
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 37,
+      "timestamp": "2026-04-15T15:15:43.301000Z",
+      "source": "agent",
+      "message": "2\n-rw-r--r-- 1 root root  26460 Apr 15 15:15 sqlite3-shell.gcda\n-rw-r--r-- 1 root root 163528 Apr 15 15:15 sqlite3-sqlite3.gcda",
+      "observation": {
+        "results": [
+          {
+            "content": "2\n-rw-r--r-- 1 root root  26460 Apr 15 15:15 sqlite3-shell.gcda\n-rw-r--r-- 1 root root 163528 Apr 15 15:15 sqlite3-sqlite3.gcda"
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-23544c3ff2b8413d8e728f9c4130edab",
+        "exec_exit_code": 0,
+        "exec_status": "completed",
+        "exec_duration_ms": 84
+      }
+    },
+    {
+      "step_id": 38,
+      "timestamp": "2026-04-15T15:15:43.303000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "Let me verify gcov can generate reports:",
+      "reasoning_content": "Excellent! Coverage data (.gcda files) is being generated correctly. Let me also verify gcov is available and can generate reports.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-992a6bc0b1054552a0b6006605060c4b",
+          "function_name": "exec",
+          "arguments": {
+            "command": "cd /app/sqlite/sqlite && gcov sqlite3.c 2>&1 | head -20"
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 147,
+        "completion_tokens": 94,
+        "cached_tokens": 34431,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 34672
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 39,
+      "timestamp": "2026-04-15T15:15:50.746000Z",
+      "source": "agent",
+      "message": "sqlite3.gcda:cannot open data file, assuming not executed\nFile 'sqlite3.c'\nLines executed:0.00% of 48364\nCreating 'sqlite3.c.gcov'\n\nLines executed:0.00% of 48364",
+      "observation": {
+        "results": [
+          {
+            "content": "sqlite3.gcda:cannot open data file, assuming not executed\nFile 'sqlite3.c'\nLines executed:0.00% of 48364\nCreating 'sqlite3.c.gcov'\n\nLines executed:0.00% of 48364"
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-992a6bc0b1054552a0b6006605060c4b",
+        "exec_exit_code": 0,
+        "exec_status": "completed",
+        "exec_duration_ms": 165
+      }
+    },
+    {
+      "step_id": 40,
+      "timestamp": "2026-04-15T15:15:50.755000Z",
+      "source": "agent",
+      "model_name": "z-ai/glm-5",
+      "message": "",
+      "reasoning_content": "Good - gcov is available. The library was compiled with amalgamation, so sqlite3.c has all the code. The shell.gcda and sqlite3-sqlite3.gcda have actual execution data. Let me check if we need to install gcov tool, and verify everything is properly set up.",
+      "tool_calls": [
+        {
+          "tool_call_id": "tool-242162b3792842e6babaae86be6cee71",
+          "function_name": "exec",
+          "arguments": {
+            "command": "which gcov && gcov --version"
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 115,
+        "completion_tokens": 142,
+        "cached_tokens": 34559,
+        "cost_usd": 0.0,
+        "extra": {
+          "cache_creation_tokens": 0,
+          "total_tokens": 34816
+        }
+      },
+      "extra": {
+        "openclaw_role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_call_id": null
+      }
+    },
+    {
+      "step_id": 41,
+      "timestamp": "2026-04-15T15:17:04.199000Z",
+      "source": "agent",
+      "message": "/usr/bin/gcov\ngcov (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+      "observation": {
+        "results": [
+          {
+            "content": "/usr/bin/gcov\ngcov (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+          }
+        ]
+      },
+      "extra": {
+        "openclaw_role": "toolResult",
+        "stop_reason": null,
+        "tool_call_id": "tool-242162b3792842e6babaae86be6cee71",
+        "exec_exit_code": 0,
+        "exec_status": "completed",
+        "exec_duration_ms": 47
+      }
+    }
+  ],
+  "final_metrics": {
+    "total_prompt_tokens": 153969,
+    "total_completion_tokens": 1948,
+    "total_cached_tokens": 378688,
+    "total_steps": 41
+  }
+}

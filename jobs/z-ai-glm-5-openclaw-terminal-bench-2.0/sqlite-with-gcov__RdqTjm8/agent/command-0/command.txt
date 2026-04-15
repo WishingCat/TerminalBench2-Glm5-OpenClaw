@@ -1,0 +1,89 @@
+# Ensure Node.js is available before configuring OpenClaw.
+command -v node >/dev/null 2>&1 || {
+    echo "node not found on PATH" >&2
+    exit 1
+}
+
+# Update openclaw.json with model, provider config, and model params
+node << 'NODE_EOF'
+const fs = require("fs");
+const path = require("path");
+
+const configPath = path.join(process.env.HOME, ".openclaw", "openclaw.json");
+const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
+
+// Update model
+config.agents.defaults.model.primary = "openai/z-ai/glm-5";
+
+// Add provider config
+const providerConfig = {
+    "baseUrl": "https://openai.sufy.com/v1",
+    "api": "openai-completions",
+    "apiKey": "OPENAI_API_KEY",
+    "models": []
+};
+config.models.providers["openai"] = providerConfig;
+
+// Add model params if provided
+const modelParams = {};
+if (Object.keys(modelParams).length > 0) {
+    if (!config.agents.defaults.models) config.agents.defaults.models = {};
+    config.agents.defaults.models["openai/z-ai/glm-5"] = { params: modelParams };
+    console.log("Added model params:", Object.keys(modelParams));
+}
+
+// Set thinking level if provided
+const thinkingLevel = "";
+if (thinkingLevel) {
+    config.agents.defaults.thinkingDefault = thinkingLevel;
+    console.log("Set thinkingDefault:", thinkingLevel);
+}
+
+fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+
+// Write auth profiles (API key read from process.env at runtime —
+// avoids bash heredoc expansion issues in sandboxed environments)
+const authProfiles = {
+    version: 1,
+    profiles: {
+        ["openai"]: {
+            type: "api_key",
+            provider: "openai",
+            key: process.env["OPENAI_API_KEY"] || ""
+        }
+    }
+};
+const authPath = path.join(process.env.HOME, ".openclaw", "agents", "main", "agent", "auth-profiles.json");
+fs.writeFileSync(authPath, JSON.stringify(authProfiles, null, 2));
+if (!authProfiles.profiles["openai"].key) {
+    console.log("WARNING: " + "OPENAI_API_KEY" + " not found in environment!");
+} else {
+    console.log("Auth profile written for provider: " + "openai");
+}
+NODE_EOF
+
+# Prepare persistent log directory (downloaded by Harbor even after timeout)
+mkdir -p /logs/agent/openclaw-sessions
+# Reverse symlink: OpenClaw writes sessions to /logs/agent/openclaw-sessions via symlink.
+# This ensures session files physically live under /logs/agent/ (Daytona doesn't follow symlinks).
+ln -sfn /logs/agent/openclaw-sessions ~/.openclaw/agents/main/sessions
+
+# Verify config
+echo "=== OpenClaw Config ==="
+cat ~/.openclaw/openclaw.json
+echo ""
+echo "=== Auth Profiles ==="
+ls -lh ~/.openclaw/agents/main/agent/auth-profiles.json
+echo ""
+echo "=== Auth Profiles (redacted) ==="
+echo '{
+  "version": 1,
+  "profiles": {
+    "openai": {
+      "type": "api_key",
+      "provider": "openai",
+      "key": "sk-bd614...2ac54b3f"
+    }
+  }
+}'
+echo ""
